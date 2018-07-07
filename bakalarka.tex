@@ -45,10 +45,12 @@
 %  master,
 %  field=inf,
 %  printversion,
-  biblatex,
+  biblatex=false,
 %  language=english,
-%  font=sans,
-  glossaries,
+  font=serif,
+  glossaries=false,
+  tables=false,
+  theorems=false,
   index
 ]{kidiplom}
 
@@ -95,25 +97,70 @@
 %\supplements{jedno kulaté placaté CD/DVD s malou kulatou dírou uprostřed}
 %\supplements[english]{one round flat CD/DVD with a small round hole in the middle}
 
-%% Volitelné poděkování. Stručné! Výchozí je prázdné. Makro nemá
-%% nepovinný parametr pro uvedení jazyka.
+%% Poděkování. Stručné!
 \thanks{Rád bych poděkoval panu Mgr. Tomáši Kührovi Ph.D. za vedení této bakalářské práce a panu RNDr. Arnoštu Večerkovi za odbornou pomoc a poskytnuté materiály k práci. Dále bych poděkoval mé rodině a přítelkyni za podporu při tvorbě.}
 
-%% Cesta k souboru s bibliografií pro její sazbu pomocí BibLaTeXu
-%% (zvolenou nepovinným parametrem biblatex makra
-%% \documentclass). Použijte pouze při této sazbě, ne při (výchozí)
-%% sazbě v prostředí thebibliography.
-%% \bibliography{bibliografie.bib}
-
-%% Další dodatečné styly (balíky) potřebné pro sazbu vlastního textu
-%% práce.
+%% Další dodatečné styly (balíky) potřebné pro sazbu vlastního textu práce.
 \usepackage{lipsum}
 
+%% Balíčky pro implementaci seznamů vedle sebe.
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+%-------------------------------------------------------------
+% TODO: Nebylo by špatné barvy a
+% zvýraznění syntaxe jazyka GLSL přesunout do
+% samostatného souboru.
+\usepackage{color}
+
+%-------------------------------------------------------------
+% Nadefinuj barvy
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%-------------------------------------------------------------
+% Nadefinuj zvýraznění syntaxe pro jazyk Pseudo
+% TODO: 1) Definice není úplně čistá.
+%            2) Přesuň tuto definici do vlastního souboru.
+\lstdefinelanguage{Pseudo}
+{
+  sensitive=false, % keywords are not case-sensitive
+  keywords={define, end, return, while, do, if, then, else, elseif, for, to, do, end, relief, paraOcc, loadSample},
+  morekeywords={},
+  %alsoletter=\#\_, % now I can use # character in keywords
+  keywordstyle=\bfseries\color{black}, % style of keywords
+  captionpos=b, % Position of the Caption (t for top, b for bottom)
+  extendedchars=true, % Allows 256 instead of 128 ASCII characters
+  tabsize=2, % number of spaces indented when discovering a tab 
+  columns=fixed, % make all characters equal width
+  keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+  showstringspaces=false, % lets spaces in strings appear as real spaces
+  breaklines=true, % wrap lines if they don't fit
+  %numbers=left, % show line numbers at the left
+  %numberstyle=\ttfamily, % style of the line numbers
+  backgroundcolor=\color{backcolour},
+  basicstyle=\small\color{black},
+  commentstyle=\color{green}, % style of comments
+  stringstyle=\color{black}, % style of strings
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+  moredelim=[is][\bfseries]{/@}{@/}
+}
+%-------------------------------------------------------------
+
+% \noindent pro cely dokument.
+% \setlength{\parindent}{0pt}
+
+%-------------------------------------------------------------
 \begin{document}
 %% Sazba úvodních stran -- titulní, s bibliografickými údaji, s
 %% anotací a klíčovými slovy, s poděkováním a prohlášením, s obsahem a
 %% se seznamy obrázků, tabulek, vět a zdrojových kódů (pokud jejich
 %% sazba není vypnutá).
+
+%-------------------------------------------------------------
+% Strany 1 - 6
+
 \maketitle
 
 %% Vlastní text závěrečné práce. Pro povinné závěry, před přílohami,
@@ -122,13 +169,65 @@
 
 %% -------------------------------------------------------------------
 
+%% Zatim neoddelat zjistit co to je.
+% \newcommand{\BibLaTeX}{\textsc{Bib}\LaTeX}
+
+%-------------------------------------------------------------
+% Strana 7
+
 \section{Úvod}
-Tato aplikace vznikla za účelem výuky základních binárních vyhledávacích stromů. Obsahuje podporu pro binární, AVL a červenočerné stromy. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.
+Tato aplikace vznikla za účelem výuky základních binárních vyhledávacích stromů. Obsahuje podporu pro binární, AVL a červenočerné stromy. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
 
-Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.
+Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
 
+\newpage
+\section{Stromy}
+V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů, byl naprogramován tento výukový nástroj.\\
 
+\smallskip
+\begin{definition}[Strom]
+\textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
+\end{definition}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.6]{obrazky/1Stromy.png}
+	\caption{Příklady neorientovaných stromů}
+	\label{BVS}
+\end{figure}
 
+\medskip
+Strom je datová struktura, která představuje stromovou strukturu propojených \textit{uzlů} \footnote{Prvek obsahující hodnotu.}. Uzly jsou mezi sebou vzájemně spojeny pomocí \textit{hran} \footnote{Představuje cestu mezi spojenými uzly.}. 
+
+\begin{definition}[Kořenový strom]
+\textit{Kořenový strom} je strom, ve kterém je vybrán jeden vrchol (kořen). Může to být kterýkoliv vrchol. Bývá to ale vrchol, který je v nějakém smyslu na vrcholu hierarchie objektů, která je stromem reprezentována.
+\cite{belohlavekALM}
+\end{definition}
+\smallskip
+
+\newpage
+\noindent {\large\textbf{Důležité pojmy:}}
+\begin{itemize}
+\item \textbf{Kořen} -- Jeden uzel, který se nachází na vrcholu stromu. Tento uzel nemá \textit{rodiče}. 
+\item \textbf{Potomek, následník} -- Uzel, který je přímo připojen k jinému uzlu, cestou od kořene.
+\item \textbf{Rodič, předchůdce} -- Uzel bez potomků.
+\item \textbf{Sourozenci} -- Skupina uzlů, které mají stejného rodiče.
+\item \textbf{Koncový uzel, list} -- Uzel, který nemá žádného potomka. 
+\end{itemize} 
+
+\subsection{Binární stromy}
+\begin{definition}[Binární stromy]
+\textit{Binární stromy} jsou typy stromů, ve kterých každý obsažený uzel má maximálně 2 potomky.
+\end{definition}
+\smallskip
+
+\noindent\textbf{Každý uzel obsahuje tyto vlastnosti:}
+\begin{itemize}
+\item \textbf{Klíč} -- Hodnota uložená v uzlu.
+\item \textbf{Ukazatel na levého potomka.}
+\item \textbf{Ukazatel na pravého potomka.}
+\item \textbf{Ukazatel na jednoho rodiče.}
+\end{itemize}
+ 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
@@ -223,7 +322,7 @@ nebo v souboru \texttt{readme.txt}.
 %% -------------------------------------------------------------------
 
 %% Sazba volitelného seznamu zkratek, za přílohami.
-\printglossary
+%\printglossary
 
 %% Sazba povinné bibliografie, za přílohami (případně i za seznamem
 %% zkratek). Při použití BibLaTeXu použijte makro
@@ -233,8 +332,21 @@ nebo v souboru \texttt{readme.txt}.
 %% BibLaTeXu. Volitelné.
 \nocite{*}
 %% Vlastní sazba bibliografie při použití BibLaTeXu.
-\printbibliography
+%% \printbibliography
 
+
+\newpage
+
+
+\begin{thebibliography}{99}	
+
+\bibitem{belohlavekALM} \uppercase{BĚlohlávek}, Radim. Algoritmická matematika 2 - část 1 [online]. 2012-05-15. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/algoritmicka-matematika-2-1.pdf}
+
+\bibitem{belohlavekVilem} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém; Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
+
+\bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
+
+\end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
 % \begin{thebibliography}{9}
 %\bibitem{kniha2} \uppercase{Hawke}, Paul. NanoHttpd: Light-weight HTTP server designed for embedding in other applications. GitHub [online]. 2014-05-12. [cit. 2014-12-06]. Dostupné z: \url{https://github.com/NanoHttpd/nanohttpd}
@@ -242,7 +354,8 @@ nebo v souboru \texttt{readme.txt}.
 %\bibitem{jeske13} \uppercase{Jeske}, David; \uppercase{Novák}, Josef. Simple HTTP Server in \csharp: Threaded synchronous HTTP Server abstract class, to respond to HTTP requests. CodeProject: For those who code [online]. 2014-05-24. [cit. 2014-12-06]. Dostupné z: \url{http://www.codeproject.com/Articles/137979/Simple-HTTP-Server-in-C}
 %
 %\bibitem{uzis2012} \uppercase{ÚSTAV ZDRAVOTNICKÝCH INFORMACÍ A STATISTIKY ČR}. Lékaři, zubní lékaři a farmaceuti 2012 [online]. Praha 2, Palackého náměstí 4: Ústav zdravotnických informací a statistiky ČR, 2012 [cit. 2014-12-06]. ISBN 978-80-7472-089-5. Dostupné z: \url{http://www.uzis.cz/publikace/lekari-zubni-lekari-farmaceuti-2012}
-% \end{thebibliography}
+
+
 
 %% Sazba volitelného rejstříku, za bibliografií.
 \printindex
