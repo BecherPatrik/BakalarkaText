@@ -184,7 +184,6 @@ Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve 
 \section{Stromy}
 V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů, byl naprogramován tento výukový nástroj.\\
 
-\smallskip
 \begin{definition}[Strom]
 \textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
 \end{definition}
@@ -192,11 +191,11 @@ V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení
 \centering
 	\includegraphics[scale=0.6]{obrazky/1Stromy.png}
 	\caption{Příklady neorientovaných stromů}
-	\label{BVS}
 \end{figure}
 
 \medskip
-Strom je datová struktura, která představuje stromovou strukturu propojených \textit{uzlů} \footnote{Prvek obsahující hodnotu.}. Uzly jsou mezi sebou vzájemně spojeny pomocí \textit{hran} \footnote{Představuje cestu mezi spojenými uzly.}. 
+Strom je datová struktura, která představuje stromovou strukturu propojených \textit{uzlů} \footnote{Prvek obsahující hodnotu.}. Uzly jsou mezi sebou vzájemně spojeny pomocí \textit{hran} \footnote{Představuje cestu mezi spojenými uzly.}. Strom složený z uzlů $U$ má $|U - 1|$ hran.
+
 
 \begin{definition}[Kořenový strom]
 \textit{Kořenový strom} je strom, ve kterém je vybrán jeden vrchol (kořen). Může to být kterýkoliv vrchol. Bývá to ale vrchol, který je v nějakém smyslu na vrcholu hierarchie objektů, která je stromem reprezentována.
@@ -207,16 +206,29 @@ Strom je datová struktura, která představuje stromovou strukturu propojených
 \newpage
 \noindent {\large\textbf{Důležité pojmy:}}
 \begin{itemize}
-\item \textbf{Kořen} -- Jeden uzel, který se nachází na vrcholu stromu. Tento uzel nemá \textit{rodiče}. 
-\item \textbf{Potomek, následník} -- Uzel, který je přímo připojen k jinému uzlu, cestou od kořene.
-\item \textbf{Rodič, předchůdce} -- Uzel bez potomků.
+\item \textbf{Uzel} -- Jednoduše jakýkoliv prvek stromu.
+\item \textbf{Kořen} -- Jeden konkrétní uzel, který se nachází na vrcholu stromu. Pouze tento uzel nemá \textit{rodiče}. 
+\item \textbf{Potomek, následník} -- Uzel, který je hranou přímo připojen k jinému uzlu, cestou od kořene.
+\item \textbf{Rodič, předchůdce} -- Uzel, který má alespoň jednoho potomka.
 \item \textbf{Sourozenci} -- Skupina uzlů, které mají stejného rodiče.
-\item \textbf{Koncový uzel, list} -- Uzel, který nemá žádného potomka. 
+\item \textbf{Podstrom} -- Část stromu, která je úplným stromem, s tím, že kořen tohoto podstromu má svého rodiče.
+\item \textbf{Koncový uzel, list} -- Uzel bez potomků. 
 \end{itemize} 
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.6]{obrazky/2PopisStromu.png}
+	\caption{Popis stromu}
+\end{figure}
+
+\begin{definition}[$m$-ární stromy]
+Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrchol má nejvýše $m$ potomků. 2-ární strom se nazývá binární. Kořenový strom se nazývá úplný $m$\textit{-ární}, právě když každý jeho vrchol nemá buď žádného nebo má právě $m$ potomků.\cite{belohlavekVychodil}
+\end{definition}
+\smallskip
 
 \subsection{Binární stromy}
 \begin{definition}[Binární stromy]
-\textit{Binární stromy} jsou typy stromů, ve kterých každý obsažený uzel má maximálně 2 potomky.
+\textit{Binární stromy} jsou typy kořenových stromů, ve kterých každý obsažený uzel má maximálně 2 potomky.
 \end{definition}
 \smallskip
 
@@ -227,6 +239,27 @@ Strom je datová struktura, která představuje stromovou strukturu propojených
 \item \textbf{Ukazatel na pravého potomka.}
 \item \textbf{Ukazatel na jednoho rodiče.}
 \end{itemize}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.9]{obrazky/3BinarniStrom.png}
+	\caption{Binární strom}
+\end{figure}
+
+\medskip
+\subsection{Binární vyhledávací strom}
+Binární \textit{vyhledávací} strom, je speciální typ binárního stromu, kde platí následující:
+\begin{itemize}
+\item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$, obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
+\item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$, obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
+\item \textbf {Ve stromě se nenachází dva uzly se stejnou hodnotou.}
+\end{itemize} 
+
+\begin{figure}[t!]
+\centering
+	\includegraphics[scale=0.7]{obrazky/4BinarniVyhledavaciStrom.png}
+	\caption{Binární vyhledávací strom}
+\end{figure}
  
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
@@ -342,9 +375,12 @@ nebo v souboru \texttt{readme.txt}.
 
 \bibitem{belohlavekALM} \uppercase{BĚlohlávek}, Radim. Algoritmická matematika 2 - část 1 [online]. 2012-05-15. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/algoritmicka-matematika-2-1.pdf}
 
-\bibitem{belohlavekVilem} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém; Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
+\bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém; Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
 
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
+
+\bibitem{BinarySearch} \uppercase{Binary Search Trees}
+Dostupné z: \url{http://cs.umw.edu/~finlayson/class/fall12/cpsc230/notes/17-binary-search-trees.html}
 
 \end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
