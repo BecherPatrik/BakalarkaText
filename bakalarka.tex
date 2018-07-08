@@ -176,7 +176,7 @@
 % Strana 7
 
 \section{Úvod}
-Tato aplikace vznikla za účelem výuky základních binárních vyhledávacích stromů. Obsahuje podporu pro binární, AVL a červenočerné stromy. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
+Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
 
 Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
 
@@ -213,6 +213,7 @@ Strom je datová struktura, která představuje stromovou strukturu propojených
 \item \textbf{Sourozenci} -- Skupina uzlů, které mají stejného rodiče.
 \item \textbf{Podstrom} -- Část stromu, která je úplným stromem, s tím, že kořen tohoto podstromu má svého rodiče.
 \item \textbf{Koncový uzel, list} -- Uzel bez potomků. 
+\item \textbf{Výška stromu} -- Nejdelší délka cesty od kořene k uzlu.
 \end{itemize} 
 
 \begin{figure}[h!]
@@ -226,9 +227,9 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \end{definition}
 \smallskip
 
-\subsection{Binární stromy}
-\begin{definition}[Binární stromy]
-\textit{Binární stromy} jsou typy kořenových stromů, ve kterých každý obsažený uzel má maximálně 2 potomky.
+\subsection{Binární strom}
+\begin{definition}[Binární strom]
+\textit{Binární strom} je typ kořenových stromů, ve kterém každý obsažený uzel má maximálně 2 potomky.
 \end{definition}
 \smallskip
 
@@ -248,18 +249,23 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 
 \medskip
 \subsection{Binární vyhledávací strom}
-Binární \textit{vyhledávací} strom, je speciální typ binárního stromu, kde platí následující:
+Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
 \begin{itemize}
 \item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$, obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
 \item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$, obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
 \item \textbf {Ve stromě se nenachází dva uzly se stejnou hodnotou.}
 \end{itemize} 
 
-\begin{figure}[t!]
+\noindent Toto uspořádání uzlů v BVS usnadňuje vyhledávání. Operace nad BVS stromem s výškou \textit{v}  mají časovou složitost $ \theta$(\textit{v}). V nejhorším případě může mít BVS výšku rovnu \textit{n} - 1, kde \textit{n} je počet uzlů. Oba případy jsou zobrazeny na obrázku \ref{binary}.
+
+\begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.7]{obrazky/4BinarniVyhledavaciStrom.png}
-	\caption{Binární vyhledávací strom}
+	\caption{Rozdílné výšky stromu}
+	\label{binary}
 \end{figure}
+
+\subsubsection{Vyhledávání v BVS}
  
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
