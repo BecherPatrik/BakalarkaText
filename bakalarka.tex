@@ -58,7 +58,6 @@
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
 \makeatother
 
-
 %% Informace pro úvodní strany. V jazyku práce (pokud není v komentáři
 %% uvedeno česky) a anglicky. Uveďte všechny, u kterých není v
 %% komentáři uvedeno, že jsou volitelné. Při neuvedení se použijí
@@ -189,6 +188,7 @@ Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve 
 \section{Stromy}
 V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\
 
+
 \begin{definition}[Strom]
 \textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
 \end{definition}
@@ -252,6 +252,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 	\caption{Binární strom}
 \end{figure}
 
+
 \medskip
 \subsection{Binární vyhledávací strom}
 Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
@@ -294,7 +295,7 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \end{enumerate}
 
 \medskip
-\noindent Na obrázku \ref{binarySearch} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 5. V obrázku je i zaznamenána historie porovnávání. 
+\noindent Na obrázku \ref{binarySearch} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 5. V obrázku je i zaznamenána historie porovnávání.
 
 \begin{figure}[h!]
 \centering
@@ -306,7 +307,7 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \medskip \medskip \medskip
 \noindent \textbf{Zdrojový kód vyhledávání v jazyku Java:}
 
-\begin{kicode}{Java}{search}
+\begin{kicode}{Java}{kod:searchBinary}{searchBinary}
 Node search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen
 	if (node == null) {
 		return null; //uzel nebyl nalezen
@@ -321,6 +322,7 @@ Node search(int value, Node node) { //value je hledaná hodnota, node je při pr
 	}
 }
 \end{kicode}
+
 
 \newpage
 \subsubsection{Vkládání}
@@ -338,8 +340,8 @@ Před vkládáním je nejprve nutno ověřit, zde se ve stromu nenachází uzel 
 \begin{itemize}
 \item Prvek byl nalezen. \\
 Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
-\item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu, při hledání}.\\
-Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel, při hledání.}
+\item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu, při hledání.}.\\
+Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel, při hledání.}.
 \item Prvek nebyl nalezen, přičemž platí $x < u.h$\footnoteref{hodnotaPosledniho}.\\
 Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnoteref{posledni}
 \end{itemize}
@@ -365,7 +367,7 @@ Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\f
 \newpage
 \noindent \textbf{Zdrojový kód vkládání v jazyku Java:}\\\\
 \noindent Před samotnou funkcí \kiinlinecode{Java}{!}{insert} je třeba vytvořit třídu \kiinlinecode{Java}{!}{Result}, která bude dále použita:
-\begin{kicode}{Java}{Class Result}
+\begin{kicode}{Java}{}{Class Result}
 Class Result() {
 	private Node node; //poslední navštívený uzel (hledaný/rodič)
 	private boolean isFind; //parametr pro určení zda byl uzel nalezen
@@ -377,7 +379,45 @@ Class Result() {
 }
 \end{kicode}
 
+\newpage
+\noindent Dále je potřeba trochu poupravit již známou funkci \kiinlinecode{Java}{!}{search} \ref{kod:searchBinary}:
 
+\begin{kicode}{Java}{}{searchBinary úprava}
+Result search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen	
+	if (value > node.getValue()) { 
+		if (node.getRight() != null) { 
+			search(value, node.getRight()); //pokud má pravého potomka
+		} else {
+			return new Result(node, false); //pokud nemá pravého potomka, node = rodič vkládaného
+		}
+	} else if (value < node.getValue()) { 
+		if (node.getLeft() != null) {
+			search(value, node.getLeft()); //pokud má levého potomka
+		} else {
+			return new Result(node, false); //pokud nemá levého potomka, node = rodič vkládaného
+		} 
+	} else { 
+		return new Result(node, true); 
+	}
+}
+\end{kicode}
+
+\noindent Nyní funkce \kiinlinecode{Java}{!}{insert}:
+
+\begin{kicode}{Java}{}{insertBinary}
+Node insert(int value) {
+	Result result = search(value); //nejprve vyhledáme value	
+	if (result.isFind()) { //pokud byl uzel s danou hodnotou nalezen
+		return result.getNode();
+	} else { //dále vkládáme 
+		if (value > result.getNode().getValue()) { 
+			result.getNode().setRight(new Node(value));
+		} else {
+			result.getNode().setLeft(new Node(value));
+		}
+	}
+	return null;
+\end{kicode}
 
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
