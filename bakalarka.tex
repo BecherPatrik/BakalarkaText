@@ -98,7 +98,7 @@
 %\supplements[english]{one round flat CD/DVD with a small round hole in the middle}
 
 %% Poděkování. Stručné!
-\thanks{Rád bych poděkoval panu Mgr. Tomáši Kührovi Ph.D. za vedení této bakalářské práce a panu RNDr. Arnoštu Večerkovi za odbornou pomoc a poskytnuté materiály k práci. Dále bych poděkoval mé rodině a přítelkyni za podporu při tvorbě.}
+\thanks{Rád bych poděkoval panu Mgr. Tomáši Kührovi Ph.D. za vedení této bakalářské práce a panu RNDr. Arnoštu Večerkovi za odbornou pomoc a poskytnuté materiály k práci. Dále bych chtěl poděkoval mé rodině a přítelkyni za podporu při tvorbě.}
 
 %% Další dodatečné styly (balíky) potřebné pro sazbu vlastního textu práce.
 \usepackage{lipsum}
@@ -182,7 +182,7 @@ Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve 
 
 \newpage
 \section{Stromy}
-V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů, byl naprogramován tento výukový nástroj.\\
+V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\
 
 \begin{definition}[Strom]
 \textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
@@ -204,7 +204,7 @@ Strom je datová struktura, která představuje stromovou strukturu propojených
 \smallskip
 
 \newpage
-\noindent {\large\textbf{Důležité pojmy:}}
+\noindent \textbf{Důležité pojmy:}
 \begin{itemize}
 \item \textbf{Uzel} -- Jednoduše jakýkoliv prvek stromu.
 \item \textbf{Kořen} -- Jeden konkrétní uzel, který se nachází na vrcholu stromu. Pouze tento uzel nemá \textit{rodiče}. 
@@ -265,7 +265,29 @@ Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárn
 	\label{binary}
 \end{figure}
 
-\subsubsection{Vyhledávání v BVS}
+\subsubsection{Vyhledávání}
+Operace \textit{vyhledávání} patří k nejčastěji používané operaci s BVS. Při \textit{vyhledávání} je potřeba zadat hodnotu $x$, kterou chceme vyhledat. Postupně dochází k porovnávání hodnot uzlů s $x$. Výsledkem vyhledávání je buď uzel, který obsahuje hodnotu $x$ nebo takový uzel neexistuje.\\
+
+\noindent \textbf{Přesný postup vyhledávání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Na začátku vyhledávání je třeba určit aktuální uzel, který označíme $u$. Hledanou hodnotu označíme $x$.\\
+V tomto kroku $u$ bude kořen stromu, pokud strom nemá kořen hodnota $x$ je nenalezena a tím vyhledávání končí.
+{\bfseries\item  krok} -- průběžný \\
+Zde dochází k porovnávání $x$ a hodnoty aktuálního uzlu $u$. Hodnotu $u$ označíme $u.h$.\\
+Pokud je $u$ prázdný vyhledávání končí neúspěchem. \\\\
+\textbf{Při porovnávání mohou nastat tyto možnosti:}
+\begin{itemize}
+\item $x > u.h$ \\
+V tomto případě jako $u$ nastavíme pravého potomka $u$. A znovu provedeme 2. krok.
+\newpage
+\item $x < u.h$\\
+V tomto případě jako $u$ nastavíme levého potomka $u$. A znovu provedeme 2. krok.
+\item $x = u.h$\\
+Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
+\end{itemize}
+\end{enumerate}
+
  
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
