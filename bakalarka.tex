@@ -54,6 +54,11 @@
   index
 ]{kidiplom}
 
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+
 %% Informace pro úvodní strany. V jazyku práce (pokud není v komentáři
 %% uvedeno česky) a anglicky. Uveďte všechny, u kterých není v
 %% komentáři uvedeno, že jsou volitelné. Při neuvedení se použijí
@@ -288,7 +293,93 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \end{itemize}
 \end{enumerate}
 
- 
+\medskip
+\noindent Na obrázku \ref{binarySearch} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 5. V obrázku je i zaznamenána historie porovnávání. 
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.9]{obrazky/5BinarniVyhledavani.png}
+	\caption{Vyhledávání hodnoty 5}
+	\label{binarySearch}
+\end{figure}
+
+\medskip \medskip \medskip
+\noindent \textbf{Zdrojový kód vyhledávání v jazyku Java:}
+
+\begin{kicode}{Java}{search}
+Node search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen
+	if (node == null) {
+		return null; //uzel nebyl nalezen
+	}
+	
+	if (value > node.getValue()) { //pokud je hledaná hodnota je vyšší než má aktuální uzel
+		search(value, node.getRight()); //nastavím aktuální uzel na pravého potomka
+	} else if (value < node.getValue()) { //pokud je hledaná hodnota je vyšší než má aktuální uzel
+		search(value, node.getLeft()); //nastavím aktuální uzel na levého potomka
+	} else { //pokud není vyšší ani nižší, tak se musí rovnat
+		return node; //vrátím nalezený uzel
+	}
+}
+\end{kicode}
+
+\newpage
+\subsubsection{Vkládání}
+Při \textit{vkládání} zadané hodnoty $x$ je nejprve nutné prohledat strom, jestli se zde $x$ již nenachází. Pokud je nalezen uzel s hodnotou $x$, je výsledkem operace nalezený uzel. V případě, že daný strom tento uzel neobsahuje, je jako potomek posledního prohledávaného uzlu vložen nový uzel s hodnotou $x$. \\
+
+
+\noindent \textbf{Přesný postup vkládání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Na začátku vkládání je třeba určit aktuální uzel, který označíme $u$. Vkládanou hodnotu označíme $x$.\\
+V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen vytvoříme nový uzel s hodnotou $x$ a vložíme do stromu. Uzel se stane kořenem stromu, čímž vkládání končí.
+{\bfseries\item  krok} -- vyhledávání, vkládání \\
+Před vkládáním je nejprve nutno ověřit, zde se ve stromu nenachází uzel s hodnotou $x$.\\\\
+\textbf{Vyhledávání může dopadnou těmito způsoby:}
+\begin{itemize}
+\item Prvek byl nalezen. \\
+Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
+\item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu, při hledání}.\\
+Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel, při hledání.}
+\item Prvek nebyl nalezen, přičemž platí $x < u.h$\footnoteref{hodnotaPosledniho}.\\
+Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnoteref{posledni}
+\end{itemize}
+\end{enumerate}
+
+\medskip
+\noindent Na obrázku \ref{binarySearchInsert} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 6. Samotné vložení je na obrázku \ref{binaryInsert}.
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani1.png}
+	\caption{Vkládání hodnoty 6 - hledání}
+	\label{binarySearchInsert}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani2.png}
+	\caption{Vkládání hodnoty 6 - vložení}
+	\label{binaryInsert}
+\end{figure}
+
+\newpage
+\noindent \textbf{Zdrojový kód vkládání v jazyku Java:}\\\\
+\noindent Před samotnou funkcí \kiinlinecode{Java}{!}{insert} je třeba vytvořit třídu \kiinlinecode{Java}{!}{Result}, která bude dále použita:
+\begin{kicode}{Java}{Class Result}
+Class Result() {
+	private Node node; //poslední navštívený uzel (hledaný/rodič)
+	private boolean isFind; //parametr pro určení zda byl uzel nalezen
+	
+	public Result(Node node, boolean isFind) { //konstruktor
+		...
+	}	
+	...
+}
+\end{kicode}
+
+\noindent Dále je potřeba trochu poupravit již známou funkci \kiinlinecode{Java}{!}{search} je třeba vytvořit třídu \kiinlinecode{Java}{!}{Result}, která bude dále použita:
+
+
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
