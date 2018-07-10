@@ -243,7 +243,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \item \textbf{Klíč} -- Hodnota uložená v uzlu.
 \item \textbf{Ukazatel na levého potomka.}
 \item \textbf{Ukazatel na pravého potomka.}
-\item \textbf{Ukazatel na jednoho rodiče.}
+\item \textbf{Ukazatel na jednoho rodiče.} -- Tento ukazatel není povinný.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -257,8 +257,8 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \subsection{Binární vyhledávací strom}
 Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
 \begin{itemize}
-\item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$, obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
-\item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$, obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
+\item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$ obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
+\item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$ obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
 \item \textbf {Ve stromě se nenachází dva uzly se stejnou hodnotou.}
 \end{itemize} 
 
@@ -313,9 +313,9 @@ Node search(int value, Node node) { //value je hledaná hodnota, node je při pr
 		return null; //uzel nebyl nalezen
 	}
 	
-	if (value > node.getValue()) { //pokud je hledaná hodnota je vyšší než má aktuální uzel
+	if (value > node.getValue()) { //pokud je hledaná hodnota vyšší než má aktuální uzel
 		search(value, node.getRight()); //nastavím aktuální uzel na pravého potomka
-	} else if (value < node.getValue()) { //pokud je hledaná hodnota je vyšší než má aktuální uzel
+	} else if (value < node.getValue()) { //pokud je hledaná hodnota vyšší než má aktuální uzel
 		search(value, node.getLeft()); //nastavím aktuální uzel na levého potomka
 	} else { //pokud není vyšší ani nižší, tak se musí rovnat
 		return node; //vrátím nalezený uzel
@@ -336,7 +336,7 @@ Na začátku vkládání je třeba určit aktuální uzel, který označíme $u$
 V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen vytvoříme nový uzel s hodnotou $x$ a vložíme do stromu. Uzel se stane kořenem stromu, čímž vkládání končí.
 {\bfseries\item  krok} -- vyhledávání, vkládání \\
 Před vkládáním je nejprve nutno ověřit, zde se ve stromu nenachází uzel s hodnotou $x$.\\\\
-\textbf{Vyhledávání může dopadnou těmito způsoby:}
+\textbf{Vyhledávání může dopadnout těmito způsoby:}
 \begin{itemize}
 \item Prvek byl nalezen. \\
 Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
@@ -406,19 +406,102 @@ Result search(int value, Node node) { //value je hledaná hodnota, node je při 
 
 \begin{kicode}{Java}{}{insertBinary}
 Node insert(int value) {
-	Result result = search(value); //nejprve vyhledáme value	
+	Result result = search(value); //nejprve vyhledáme value		
 	if (result.isFind()) { //pokud byl uzel s danou hodnotou nalezen
 		return result.getNode();
-	} else { //dále vkládáme 
-		if (value > result.getNode().getValue()) { 
-			result.getNode().setRight(new Node(value));
-		} else {
-			result.getNode().setLeft(new Node(value));
+	} else { //dále vkládáme nově vytvořený uzel: 
+		if (value > result.getNode().getValue()) {
+			result.getNode().setRight(new Node(value));//bude pravý potomek
+		} else { 
+			result.getNode().setLeft(new Node(value));//bude levý potomek
 		}
 	}
 	return null;
 \end{kicode}
 
+\newpage
+\subsubsection{Odebírání}
+Při \textit{odebírání} zadané hodnoty $x$ je stejně jako u vkládání nejprve nutné prohledat strom, zda se odebíraný uzel s hodnotou $x$ ve stromě nachází. Pokud je uzel nalezen, je následně smazán a případně struktura stromu upravena.\\
+
+\noindent \textbf{Přesný postup odebírání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Na začátku odebírání je třeba určit aktuální uzel, který označíme $u$. Odebíranou hodnotu označíme $x$.\\
+V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen odebírání končí, uzel s hodnotou $x$ nebyl nalezen.
+{\bfseries\item  krok} -- vyhledávání \\
+Před odebíráním je nejprve nutno uzel s hodnotou $x$ vyhledat.\\\\
+\textbf{Vyhledávání může dopadnout těmito způsoby:}
+\begin{itemize}
+\item Prvek nebyl nalezen. \\
+Pokud se uzel s hodnotou $x$ ve stromě nenachází, odebírání končí neúspěchem.
+\item Prvek byl nalezen. \\
+Nyní můžeme nalezený uzel $u$ odebrat.
+\end{itemize}
+{\bfseries\item  krok} -- odebírání \\\\
+\textbf{Odebírání $u$ má tyto možnosti:}
+\begin{itemize}
+\item Pokud $u$ je list\footnote{Nemá žádné potomky.}. \\
+List $u$ může být odebrán.
+\item $u$ má jednoho potomka. \\
+$u$ bude nahrazen podstromem potomka.
+\item $u$ má dva potomky. 
+\begin{itemize}
+\item $u$ bude nahrazen \textit{nejlevějším} prvkem z \textit{pravého} podstromu.
+\item $u$ bude nahrazen \textit{nejpravějším} prvkem z \textit{levého} podstromu.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\medskip
+\noindent V následujícím obrázku \ref{binaryDelete} je ukázka mazání uzlu s hodnotou 4, který je následně nahrazen uzlem s hodnotou 5, který je \textit{nejlevější} prvek z \textit{pravého} podstromu.
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.7]{obrazky/7BinarniMazani.png}
+	\caption{Odebírání hodnoty 4}
+	\label{binaryDelete}
+\end{figure}
+
+\newpage\noindent \textbf{Zdrojový kód\footnote{Tento kód je pouze zjednodušená implementace k lepšímu pochopení odebírání.} odebírání v jazyku Java:}\\\\
+
+\begin{kicode}{Java}{}{deleteBinary}
+boolean delete(int value) {
+	Node removeNode = result.getNode();
+	Node helpNode; //pomocná proměnná
+	
+	Result result = search(value); //vyhledám hodnotu
+	
+	if (!result.isFind()) {  //pokud ho nenajdu
+		return false;
+	}	
+	
+	if ((removedNode.getLeft() != null) && (removedNode.getRight() != null)) { //Pokud má dva potomky 
+		helpNode = removeNode.getRight(); //dosadím pravého potomka	
+			
+		while (helpNode.getLeft() != null) { //a hledám nejlevějšího
+			helpNode = helpNode.getLeft();
+		}
+		
+		removeNode.setNode(helpNode);
+	} else if (removedNode.getLeft() != null) { //pouze levý potomek
+		removeNode.setNode(removedNode.getLeft());
+	} else if (removedNode.getRight() != null) { //pouze pravý potomek
+		removeNode.setNode(removedNode.getRight());
+	} else { //pokud je to list   
+		removeNode.delete(); //odstraním list ze stromu
+	}        
+	
+	return true; 
+}
+\end{kicode} 
+
+\newpage
+\subsection{AVL strom}
+Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS jsou závislé na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. 
+
+\begin{definition}[Vyvážený strom]
+Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nejvýše 1.\cite{Adelson}\cite{dvorsky}
+\end{definition}
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
@@ -534,12 +617,15 @@ nebo v souboru \texttt{readme.txt}.
 
 \bibitem{belohlavekALM} \uppercase{BĚlohlávek}, Radim. Algoritmická matematika 2 - část 1 [online]. 2012-05-15. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/algoritmicka-matematika-2-1.pdf}
 
-\bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém; Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
+\bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém. Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
 
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
 
 \bibitem{BinarySearch} \uppercase{Binary Search Trees}
 Dostupné z: \url{http://cs.umw.edu/~finlayson/class/fall12/cpsc230/notes/17-binary-search-trees.html}
+
+\bibitem{Adelson} \uppercase{Adelson-Velskii}, G. M.; \uppercase{Landis}, E. M. An algorithm for the or-
+ganization of information. Soviet Mathematics Doklady, 3:1259–1263, 1962. [online]. [cit. 2018-07-07] Dostupné z: \url{http://professor.ufabc.edu.br/~jesus.mena/courses/mc3305-2q-2015/AED2-10-avl-paper.pdf}
 
 \end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
