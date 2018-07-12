@@ -300,7 +300,7 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/5BinarniVyhledavani.png}
-	\caption{Vyhledávání hodnoty 5}
+	\caption{Postup vyhledávání hodnoty 5}
 	\label{binarySearch}
 \end{figure}
 
@@ -353,14 +353,14 @@ Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\foot
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani1.png}
-	\caption{Vkládání hodnoty 6 - hledání}
+	\caption{Postup vkládání hodnoty 6 - hledání}
 	\label{binarySearchInsert}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani2.png}
-	\caption{Vkládání hodnoty 6 - vložení}
+	\caption{Postup vkládání hodnoty 6 - vložení}
 	\label{binaryInsert}
 \end{figure}
 
@@ -458,7 +458,7 @@ $u$ bude nahrazen podstromem potomka.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.7]{obrazky/7BinarniMazani.png}
-	\caption{Odebírání hodnoty 4}
+	\caption{Postup odebírání hodnoty 4}
 	\label{binaryDelete}
 \end{figure}
 
@@ -497,12 +497,14 @@ boolean delete(int value) {
 
 \newpage
 \subsection{AVL strom}
-Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS je závislá na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. 
+Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS je závislá na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. \\
 
 \begin{definition}[Vyvážený strom]
 Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nejvýše 1.\cite{Adelson}\cite{dvorsky}
 \end{definition}
 
+\noindent Kvůli udržování vyváženosti stromu mají operace \textit{vkládání} a \textit{odebírání} složitost $\theta(log (n))$.\\
+\newpage
 \noindent V následujícím obrázku \ref{vyvazenyStrom} je předchozí definice o vyváženém stromu názorně vysvětlena. Nejprve je třeba zavést pojmy:
 \begin{itemize}
 \item $u$ -- aktuální uzel.
@@ -520,31 +522,166 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 \end{figure}
 
 \noindent\textbf{Faktor vyvážení}\\
-Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může $b$ být 2 nebo -2, pak je zapotřebí provést transformaci, která dosáhne vyvážení daného uzlu.
+Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může být $b$ 2 nebo -2, pak je ale nutné provést transformaci, která dosáhne vyvážení daného uzlu.
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.3]{obrazky/9AVLFaktor.png}
 	\caption{Výpočet faktoru vyvážení pro uzel $u$}
-	\label{vyvazenyStrom}
 \end{figure}
+
+\newpage\noindent \textbf{Zdrojový kód rekurzivního výpočtu faktoru v jazyku Java:}
+
+\begin{kicode}{Java}{}{computeFactor}
+int computeFactor() {		
+	int lHeight = 0; //výška levého podstromu
+	int rHeight = 0; //výška pravého podstromu
+		
+	if (left != null) { //pokud má levý podstrom
+		lHeight = left.computeFactor();
+	}
+		
+	if (right != null) { //pokud má pravý podstrom
+		rHeight = right.computeFactor();
+	}		
+		
+	factor = lHeight - rHeight; 
+		
+	return Math.max(rHeight, lHeight) + 1;		
+}
+\end{kicode} 
 
 \begin{figure}[h!]
 \centering
-	\includegraphics[scale=0.9]{obrazky/10AVLUkazka.png}
+	\includegraphics[scale=1]{obrazky/10AVLUkazka.png}
 	\caption{Ukázka vyváženého AVL stromu}
-	\label{vyvazenyStrom}
 \end{figure}
 
-\newpage
-\noindent\textbf{Každý uzel ALV stromu obsahuje tyto vlastnosti:}
+
+\noindent\textbf{Každý uzel ALV stromu nyní obsahuje tyto vlastnosti:}
 \begin{itemize}
 \item \textbf{Klíč} -- Hodnota uložená v uzlu.
 \item \textbf{Faktor vyvážení} -- Faktor vyvážení daného uzlu.
 \item \textbf{Ukazatel na levého potomka}
 \item \textbf{Ukazatel na pravého potomka}
-\item \textbf{Ukazatel na jednoho rodiče} -- Tento ukazatel není povinný.
+\item \textbf{Ukazatel na jednoho rodiče}
 \end{itemize}
+
+\subsubsection{Rotace}
+K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} pouze změní ukazatele uzlů v nevyvážené části stromu, aby došlo k opětovnému vyvážení. V AVL stromu se k vyvažování podle typu nevyvážené části stromu, používají tyto rotace:\\
+
+\noindent\textbf{Jednoduchá rotace RR}\\
+\noindent Nevyvážený uzel má $b = 2$, jeho \textit{levý potomek} má $b = 0$ nebo $b = 1$.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/11RR.png}
+	\caption{Rotace RR}
+\end{figure}
+
+\noindent\textbf{Jednoduchá rotace LL}\\
+\noindent Nevyvážený uzel má $b = -2$, jeho \textit{pravý potomek} má $b = -1$ nebo $b = 0$.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/12LL.png}
+	\caption{Rotace LL}
+\end{figure}
+
+\newpage
+\noindent\textbf{Dvojitá rotace RL}\\
+\noindent Nevyvážený uzel má $b = 2$, jeho \textit{levý potomek} má $b = 1$.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/13RL.png}
+	\caption{Rotace RL}
+\end{figure}
+
+\noindent\textbf{Dvojitá rotace LR}\\
+\noindent Nevyvážený uzel má $b = -2$, jeho \textit{pravý potomek} má $b = 1$.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/14LR.png}
+	\caption{Rotace LR}
+\end{figure}
+
+\subsubsection{Vyhledávání}
+\textit{Vyhledávání} u AVL stromu se nijak neliší od toho v BVS.
+
+\subsubsection{Vkládání}
+\textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
+
+\newpage
+\noindent \textbf{Přesný postup vkládání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- vyhledávání, vkládání \\
+Novému uzlu po vložení nastavíme faktor vyvážení na 0 a $u$ nastavíme na předchůdce nově vloženého uzlu.\\
+Pokud nově vložený uzel je kořen vkládání úspěšně končí.
+{\bfseries\item  krok} -- výpočet faktoru vyvážení \\
+V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
+\textbf{Po aktualizace $u.b$ mohou nastat tyto případy:}
+\begin{itemize}
+\item $u.b = 1$ nebo $u.b = -1$\\
+Pokud $u$ je kořen, vkládání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 3.
+\item $u.b = 2$ nebo $u.b = -2$\\
+Provede se příslušná rotace.\\
+Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, vkládání úspěšně končí. Jinak $u$ nastavíme na předchůdce $u$ a znovu opakujeme krok 3.
+\item $u.b = 0$\\
+Vkládaní úspěšně končí.
+\end{itemize}
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.55]{obrazky/15AVLVlozeni.png}
+	\caption{Postup vkládání hodnoty 5}
+\end{figure}
+
+\subsubsection{Odebírání}
+\textit{Odebírání} založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+
+\newpage
+\noindent \textbf{Přesný postup odebírání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- vyhledávání \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- odebírání \\\\
+\textbf{Odebírání $u$ má tyto možnosti:}
+\begin{itemize}
+\item Pokud $u$ je list. \\
+List $u$ může být odebrán. \\
+Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+\item $u$ má jednoho potomka. \\
+$u$ bude nahrazen podstromem potomka.
+Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+\item $u$ má dva potomky. 
+\begin{itemize}
+\item $u$ bude nahrazen \textit{nejlevějším} prvkem z \textit{pravého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
+\item $u$ bude nahrazen \textit{nejpravějším} prvkem z \textit{levého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
+\end{itemize}
+Rodiče uzlu, který nahradil $u$ uložíme do $u$.
+\end{itemize}
+{\bfseries\item  krok} -- výpočet faktoru vyvážení \\
+V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
+\textbf{Po aktualizace $u.b$ mohou nastat tyto případy:}
+\begin{itemize}
+\item $u.b = <-1,1>$\\
+Pokud $u$ je kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 4.
+\item $u.b = 2$ nebo $u.b = -2$\\
+Provede se příslušná rotace.\\
+Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na předchůdce $u$ a znovu opakujeme krok 4.
+\end{itemize}
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.55]{obrazky/16AVLOdebirani.png}
+	\caption{Postup odebírání hodnoty 1}
+\end{figure}
+
+
 
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
@@ -663,6 +800,8 @@ nebo v souboru \texttt{readme.txt}.
 
 \bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém. Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
 
+\bibitem{vecerka} \uppercase{veČerka}, Arnošt. Studijní materiály ALM-2
+
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
 
 \bibitem{BinarySearch} \uppercase{Binary Search Trees}
@@ -670,6 +809,9 @@ Dostupné z: \url{http://cs.umw.edu/~finlayson/class/fall12/cpsc230/notes/17-bin
 
 \bibitem{Adelson} \uppercase{Adelson-Velskii}, G. M.; \uppercase{Landis}, E. M. An algorithm for the or-
 ganization of information. Soviet Mathematics Doklady, 3:1259–1263, 1962. [online]. [cit. 2018-07-07] Dostupné z: \url{http://professor.ufabc.edu.br/~jesus.mena/courses/mc3305-2q-2015/AED2-10-avl-paper.pdf}
+
+\bibitem{algorithms} \uppercase{Galles}, David. Data Structure Visualizations [online]. [cit. 2018-07-07]
+Dostupné z: \url{https://www.cs.usfca.edu/~galles/visualization/Algorithms.html}
 
 \end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
