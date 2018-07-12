@@ -180,17 +180,16 @@
 % Strana 7
 
 \section{Úvod}
-Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
-
-Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
+\indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
+\indent Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
 
 \newpage
 \section{Stromy}
-V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\
+\indent \indent V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\
 
 
 \begin{definition}[Strom]
-\textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
+\indent \textit{Strom} je neorientovaný \footnote{Mezi každými dvěma vrcholy existuje právě jedna cesta.} souvislý \footnote{Vynecháním libovolné hrany vznikne nesouvislý graf.} graf bez kružnic \footnote{Přidáním jakékoli hrany vznikne graf s kružnicí.} \cite{belohlavekALM}.
 \end{definition}
 \begin{figure}[h!]
 \centering
@@ -199,11 +198,11 @@ V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení
 \end{figure}
 
 \medskip
-Strom je datová struktura, která představuje stromovou strukturu propojených \textit{uzlů} \footnote{Prvek obsahující hodnotu.}. Uzly jsou mezi sebou vzájemně spojeny pomocí \textit{hran} \footnote{Představuje cestu mezi spojenými uzly.}. Strom složený z uzlů $U$ má $|U - 1|$ hran.
+\noindent Strom je datová struktura, která představuje stromovou strukturu propojených \textit{uzlů} \footnote{Prvek obsahující hodnotu.}. Uzly jsou mezi sebou vzájemně spojeny pomocí \textit{hran} \footnote{Představuje cestu mezi spojenými uzly.}. Strom složený z uzlů $U$ má $|U - 1|$ hran.
 
 
 \begin{definition}[Kořenový strom]
-\textit{Kořenový strom} je strom, ve kterém je vybrán jeden vrchol (kořen). Může to být kterýkoliv vrchol. Bývá to ale vrchol, který je v nějakém smyslu na vrcholu hierarchie objektů, která je stromem reprezentována.
+\indent \textit{Kořenový strom} je strom, ve kterém je vybrán jeden vrchol (kořen). Může to být kterýkoliv vrchol. Bývá to ale vrchol, který je v nějakém smyslu na vrcholu hierarchie objektů, která je stromem reprezentována.
 \cite{belohlavekALM}
 \end{definition}
 \smallskip
@@ -255,7 +254,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 
 \medskip
 \subsection{Binární vyhledávací strom}
-Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
+\indent\indent Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
 \begin{itemize}
 \item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$ obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
 \item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$ obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
@@ -272,7 +271,7 @@ Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárn
 \end{figure}
 
 \subsubsection{Vyhledávání}
-Operace \textit{vyhledávání} patří k nejčastěji používané operaci s BVS. Při \textit{vyhledávání} je potřeba zadat hodnotu $x$, kterou chceme vyhledat. Postupně dochází k porovnávání hodnot uzlů s $x$. Výsledkem vyhledávání je buď uzel, který obsahuje hodnotu $x$ nebo takový uzel neexistuje.\\
+\indent\indent Operace \textit{vyhledávání} patří k nejčastěji používané operaci s BVS. Při \textit{vyhledávání} je potřeba zadat hodnotu $x$, kterou chceme vyhledat. Postupně dochází k porovnávání hodnot uzlů s $x$. Výsledkem vyhledávání je buď uzel, který obsahuje hodnotu $x$ nebo takový uzel neexistuje.\\
 
 \noindent \textbf{Přesný postup vyhledávání:}
 \begin{enumerate} {\bfseries
@@ -326,7 +325,7 @@ Node search(int value, Node node) { //value je hledaná hodnota, node je při pr
 
 \newpage
 \subsubsection{Vkládání}
-Při \textit{vkládání} zadané hodnoty $x$ je nejprve nutné prohledat strom, jestli se zde $x$ již nenachází. Pokud je nalezen uzel s hodnotou $x$, je výsledkem operace nalezený uzel. V případě, že daný strom tento uzel neobsahuje, je jako potomek posledního prohledávaného uzlu vložen nový uzel s hodnotou $x$. \\
+\indent\indent Při \textit{vkládání} zadané hodnoty $x$ je nejprve nutné prohledat strom, jestli se zde $x$ již nenachází. Pokud je nalezen uzel s hodnotou $x$, je výsledkem operace nalezený uzel. V případě, že daný strom tento uzel neobsahuje, je jako potomek posledního prohledávaného uzlu vložen nový uzel s hodnotou $x$. \\
 
 
 \noindent \textbf{Přesný postup vkládání:}
@@ -421,7 +420,7 @@ Node insert(int value) {
 
 \newpage
 \subsubsection{Odebírání}
-Při \textit{odebírání} zadané hodnoty $x$ je stejně jako u vkládání nejprve nutné prohledat strom, zda se odebíraný uzel s hodnotou $x$ ve stromě nachází. Pokud je uzel nalezen, je následně smazán a struktura stromu případně upravena.\\
+\indent\indent Při \textit{odebírání} zadané hodnoty $x$ je stejně jako u vkládání nejprve nutné prohledat strom, zda se odebíraný uzel s hodnotou $x$ ve stromě nachází. Pokud je uzel nalezen, je následně smazán a struktura stromu případně upravena.\\
 
 \noindent \textbf{Přesný postup odebírání:}
 \begin{enumerate} {\bfseries
@@ -497,7 +496,7 @@ boolean delete(int value) {
 
 \newpage
 \subsection{AVL strom}
-Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS je závislá na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. \\
+\indent\indent Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS je závislá na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. \\
 
 \begin{definition}[Vyvážený strom]
 Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nejvýše 1.\cite{Adelson}\cite{dvorsky}
@@ -522,7 +521,8 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 \end{figure}
 
 \noindent\textbf{Faktor vyvážení}\\
-Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může být $b$ 2 nebo -2, pak je ale nutné provést transformaci, která dosáhne vyvážení daného uzlu.
+\indent Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ 
+\indent Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může být $b$ 2 nebo -2, pak je ale nutné provést transformaci, která dosáhne vyvážení daného uzlu.
 
 \begin{figure}[h!]
 \centering
@@ -568,7 +568,7 @@ int computeFactor() {
 \end{itemize}
 
 \subsubsection{Rotace}
-K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} pouze změní ukazatele uzlů v nevyvážené části stromu, aby došlo k opětovnému vyvážení. V AVL stromu se k vyvažování podle typu nevyvážené části stromu, používají tyto rotace:\\
+\indent\indent K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} pouze změní ukazatele uzlů v nevyvážené části stromu, aby došlo k opětovnému vyvážení. V AVL stromu se k vyvažování podle typu nevyvážené části stromu, používají tyto rotace:\\
 
 \noindent\textbf{Jednoduchá rotace RR}\\
 \noindent Nevyvážený uzel má $b = 2$, jeho \textit{levý potomek} má $b = 0$ nebo $b = 1$.
@@ -604,10 +604,10 @@ K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} p
 \end{figure}
 
 \subsubsection{Vyhledávání}
-\textit{Vyhledávání} u AVL stromu se nijak neliší od toho v BVS.
+\indent\indent \textit{Vyhledávání} u AVL stromu se nijak neliší od toho v BVS.
 
 \subsubsection{Vkládání}
-\textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
+\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
 
 \newpage
 \noindent \textbf{Přesný postup vkládání:}
@@ -638,7 +638,7 @@ Vkládaní úspěšně končí.
 \end{figure}
 
 \subsubsection{Odebírání}
-\textit{Odebírání} založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+\indent\indent \textit{Odebírání} založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
 
 \newpage
 \noindent \textbf{Přesný postup odebírání:}
@@ -681,6 +681,10 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 	\caption{Postup odebírání hodnoty 1}
 \end{figure}
 
+\newpage
+\subsection{Červeno-černý strom}
+\indent\indent\textit{Červeno-černý strom} (zkratka ČČ)
+ 
 
 
 
