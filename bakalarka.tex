@@ -241,9 +241,9 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \noindent\textbf{Každý uzel obsahuje tyto vlastnosti:}
 \begin{itemize}
 \item \textbf{Klíč} -- Hodnota uložená v uzlu.
-\item \textbf{Ukazatel na levého potomka.}
-\item \textbf{Ukazatel na pravého potomka.}
-\item \textbf{Ukazatel na jednoho rodiče.} -- Tento ukazatel není povinný.
+\item \textbf{Ukazatel na levého potomka}
+\item \textbf{Ukazatel na pravého potomka}
+\item \textbf{Ukazatel na jednoho rodiče} -- Tento ukazatel není povinný.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -262,7 +262,7 @@ Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárn
 \item \textbf {Ve stromě se nenachází dva uzly se stejnou hodnotou.}
 \end{itemize} 
 
-\noindent Toto uspořádání uzlů v BVS usnadňuje vyhledávání. Operace nad BVS stromem s výškou \textit{v}  mají časovou složitost $ \theta$(\textit{v}). V nejhorším případě může mít BVS výšku rovnu \textit{n} - 1, kde \textit{n} je počet uzlů. Oba případy jsou zobrazeny na obrázku \ref{binary}.
+\noindent Toto uspořádání uzlů v BVS usnadňuje vyhledávání. Operace nad BVS stromem s výškou \textit{h}  mají časovou složitost $ \theta$(\textit{h}). V nejhorším případě může mít BVS výšku rovnu \textit{n} - 1, kde \textit{n} je počet uzlů. Oba případy jsou zobrazeny na obrázku \ref{binary}.
 
 \begin{figure}[h!]
 \centering
@@ -278,10 +278,10 @@ Operace \textit{vyhledávání} patří k nejčastěji používané operaci s BV
 \begin{enumerate} {\bfseries
 \item  krok} -- počáteční \\
 Na začátku vyhledávání je třeba určit aktuální uzel, který označíme $u$. Hledanou hodnotu označíme $x$.\\
-V tomto kroku $u$ bude kořen stromu, pokud strom nemá kořen hodnota $x$ je nenalezena a tím vyhledávání končí.
+V tomto kroku $u$ bude kořen stromu, pokud strom nemá kořen, hodnota $x$ je nenalezena a tím vyhledávání končí.
 {\bfseries\item  krok} -- průběžný \\
 Zde dochází k porovnávání $x$ a hodnoty aktuálního uzlu $u$. Hodnotu $u$ označíme $u.h$.\\
-Pokud je $u$ prázdný vyhledávání končí neúspěchem. \\\\
+Pokud je $u$ prázdný, vyhledávání končí neúspěchem. \\\\
 \textbf{Při porovnávání mohou nastat tyto možnosti:}
 \begin{itemize}
 \item $x > u.h$ \\
@@ -295,7 +295,7 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \end{enumerate}
 
 \medskip
-\noindent Na obrázku \ref{binarySearch} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 5. V obrázku je i zaznamenána historie porovnávání.
+\noindent Na obrázku \ref{binarySearch} je zvýrazněna cesta průchodů stromem při vyhledávání uzlu s hodnotou 5. Na obrázku je i zaznamenána historie porovnávání.
 
 \begin{figure}[h!]
 \centering
@@ -307,7 +307,7 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \medskip \medskip \medskip
 \noindent \textbf{Zdrojový kód vyhledávání v jazyku Java:}
 
-\begin{kicode}{Java}{kod:searchBinary}{searchBinary}
+\begin{kicode}{Java}{kod:searchBinary}{search}
 Node search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen
 	if (node == null) {
 		return null; //uzel nebyl nalezen
@@ -333,17 +333,17 @@ Při \textit{vkládání} zadané hodnoty $x$ je nejprve nutné prohledat strom,
 \begin{enumerate} {\bfseries
 \item  krok} -- počáteční \\
 Na začátku vkládání je třeba určit aktuální uzel, který označíme $u$. Vkládanou hodnotu označíme $x$.\\
-V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen vytvoříme nový uzel s hodnotou $x$ a vložíme do stromu. Uzel se stane kořenem stromu, čímž vkládání končí.
+V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen, vytvoříme nový uzel s hodnotou $x$ a ten vložíme do stromu. Uzel se stane kořenem stromu, čímž vkládání končí.
 {\bfseries\item  krok} -- vyhledávání, vkládání \\
 Před vkládáním je nejprve nutno ověřit, zde se ve stromu nenachází uzel s hodnotou $x$.\\\\
 \textbf{Vyhledávání může dopadnout těmito způsoby:}
 \begin{itemize}
 \item Prvek byl nalezen. \\
 Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
-\item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu, při hledání.}.\\
-Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel, při hledání.}.
+\item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu při hledání.}.\\
+Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel při hledání.}.
 \item Prvek nebyl nalezen, přičemž platí $x < u.h$\footnoteref{hodnotaPosledniho}.\\
-Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\footnoteref{posledni}
+Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\footnoteref{posledni}
 \end{itemize}
 \end{enumerate}
 
@@ -367,7 +367,7 @@ Vytvoříme nový uzel s hodnotou $x$ a vložíme ho jako pravého potomka $u$\f
 \newpage
 \noindent \textbf{Zdrojový kód vkládání v jazyku Java:}\\\\
 \noindent Před samotnou funkcí \kiinlinecode{Java}{!}{insert} je třeba vytvořit třídu \kiinlinecode{Java}{!}{Result}, která bude dále použita:
-\begin{kicode}{Java}{}{Class Result}
+\begin{kicode}{Java}{}{Result - Třída}
 Class Result() {
 	private Node node; //poslední navštívený uzel (hledaný/rodič)
 	private boolean isFind; //parametr pro určení zda byl uzel nalezen
@@ -382,7 +382,7 @@ Class Result() {
 \newpage
 \noindent Dále je potřeba trochu poupravit již známou funkci \kiinlinecode{Java}{!}{search} \ref{kod:searchBinary}:
 
-\begin{kicode}{Java}{}{searchBinary úprava}
+\begin{kicode}{Java}{}{search - úprava}
 Result search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen	
 	if (value > node.getValue()) { 
 		if (node.getRight() != null) { 
@@ -404,7 +404,7 @@ Result search(int value, Node node) { //value je hledaná hodnota, node je při 
 
 \noindent Nyní funkce \kiinlinecode{Java}{!}{insert}:
 
-\begin{kicode}{Java}{}{insertBinary}
+\begin{kicode}{Java}{}{insert}
 Node insert(int value) {
 	Result result = search(value); //nejprve vyhledáme value		
 	if (result.isFind()) { //pokud byl uzel s danou hodnotou nalezen
@@ -421,7 +421,7 @@ Node insert(int value) {
 
 \newpage
 \subsubsection{Odebírání}
-Při \textit{odebírání} zadané hodnoty $x$ je stejně jako u vkládání nejprve nutné prohledat strom, zda se odebíraný uzel s hodnotou $x$ ve stromě nachází. Pokud je uzel nalezen, je následně smazán a případně struktura stromu upravena.\\
+Při \textit{odebírání} zadané hodnoty $x$ je stejně jako u vkládání nejprve nutné prohledat strom, zda se odebíraný uzel s hodnotou $x$ ve stromě nachází. Pokud je uzel nalezen, je následně smazán a struktura stromu případně upravena.\\
 
 \noindent \textbf{Přesný postup odebírání:}
 \begin{enumerate} {\bfseries
@@ -464,7 +464,7 @@ $u$ bude nahrazen podstromem potomka.
 
 \newpage\noindent \textbf{Zdrojový kód\footnote{Tento kód je pouze zjednodušená implementace k lepšímu pochopení odebírání.} odebírání v jazyku Java:}\\\\
 
-\begin{kicode}{Java}{}{deleteBinary}
+\begin{kicode}{Java}{}{delete}
 boolean delete(int value) {
 	Node removeNode = result.getNode();
 	Node helpNode; //pomocná proměnná
@@ -497,11 +497,55 @@ boolean delete(int value) {
 
 \newpage
 \subsection{AVL strom}
-Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS jsou závislé na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. 
+Určitým způsobem by se dalo tvrdit, že \textit{AVL strom} je binární vyhledávací strom, který má ale jednu zásadní odlišnost. Složitost všech operací u BVS je závislá na výšce stromu, je tedy žádoucí udržovat výšku stromu co nejnižší. \textit{AVL strom} je tedy vyvážený binární vyhledávací strom. 
 
 \begin{definition}[Vyvážený strom]
 Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nejvýše 1.\cite{Adelson}\cite{dvorsky}
 \end{definition}
+
+\noindent V následujícím obrázku \ref{vyvazenyStrom} je předchozí definice o vyváženém stromu názorně vysvětlena. Nejprve je třeba zavést pojmy:
+\begin{itemize}
+\item $u$ -- aktuální uzel.
+\item $L$ -- levý podstrom $u$.
+\item $P$ -- pravý podstrom $u$.
+\item $h_L$ -- výška levého podstromu.
+\item $h_P$ -- výška pravého podstrom.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.3]{obrazky/8AVLVyvazenyStrom.png}
+	\caption{Vyvážený strom}
+	\label{vyvazenyStrom}
+\end{figure}
+
+\noindent\textbf{Faktor vyvážení}\\
+Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může $b$ být 2 nebo -2, pak je zapotřebí provést transformaci, která dosáhne vyvážení daného uzlu.
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.3]{obrazky/9AVLFaktor.png}
+	\caption{Výpočet faktoru vyvážení pro uzel $u$}
+	\label{vyvazenyStrom}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.9]{obrazky/10AVLUkazka.png}
+	\caption{Ukázka vyváženého AVL stromu}
+	\label{vyvazenyStrom}
+\end{figure}
+
+\newpage
+\noindent\textbf{Každý uzel ALV stromu obsahuje tyto vlastnosti:}
+\begin{itemize}
+\item \textbf{Klíč} -- Hodnota uložená v uzlu.
+\item \textbf{Faktor vyvážení} -- Faktor vyvážení daného uzlu.
+\item \textbf{Ukazatel na levého potomka}
+\item \textbf{Ukazatel na pravého potomka}
+\item \textbf{Ukazatel na jednoho rodiče} -- Tento ukazatel není povinný.
+\end{itemize}
+
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
