@@ -312,10 +312,10 @@ Node search(int value, Node node) { //value je hledaná hodnota, node je při pr
 		return null; //uzel nebyl nalezen
 	}
 	
-	if (value > node.getValue()) { //pokud je hledaná hodnota vyšší než má aktuální uzel
-		search(value, node.getRight()); //nastavím aktuální uzel na pravého potomka
+	if (value > node.getValue()) {//pokud je hledaná hodnota vyšší než má aktuální uzel
+		search(value, node.getRight());//nastavím uzel na pravého potomka
 	} else if (value < node.getValue()) { //pokud je hledaná hodnota vyšší než má aktuální uzel
-		search(value, node.getLeft()); //nastavím aktuální uzel na levého potomka
+		search(value, node.getLeft()); //nastavím uzel na levého potomka
 	} else { //pokud není vyšší ani nižší, tak se musí rovnat
 		return node; //vrátím nalezený uzel
 	}
@@ -342,7 +342,7 @@ Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
 \item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu při hledání.}.\\
 Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel při hledání.}.
 \item Prvek nebyl nalezen, přičemž platí $x < u.h$\footnoteref{hodnotaPosledniho}.\\
-Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\footnoteref{posledni}
+Vytvoříme nový uzel s hodnotou $x$ a vložíme jako levého potomka $u$\footnoteref{posledni}
 \end{itemize}
 \end{enumerate}
 
@@ -510,7 +510,7 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 \item $L$ -- levý podstrom $u$.
 \item $P$ -- pravý podstrom $u$.
 \item $h_L$ -- výška levého podstromu.
-\item $h_P$ -- výška pravého podstrom.
+\item $h_P$ -- výška pravého podstromu.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -558,7 +558,7 @@ int computeFactor() {
 \end{figure}
 
 
-\noindent\textbf{Každý uzel ALV stromu nyní obsahuje tyto vlastnosti:}
+\noindent\textbf{Každý uzel ALV stromu obsahuje tyto vlastnosti:}
 \begin{itemize}
 \item \textbf{Klíč} -- Hodnota uložená v uzlu.
 \item \textbf{Faktor vyvážení} -- Faktor vyvážení daného uzlu.
@@ -607,7 +607,7 @@ int computeFactor() {
 \indent\indent \textit{Vyhledávání} u AVL stromu se nijak neliší od toho v BVS.
 
 \subsubsection{Vkládání}
-\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
+\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
 
 \newpage
 \noindent \textbf{Přesný postup vkládání:}
@@ -619,7 +619,7 @@ Novému uzlu po vložení nastavíme faktor vyvážení na 0 a $u$ nastavíme na
 Pokud nově vložený uzel je kořen vkládání úspěšně končí.
 {\bfseries\item  krok} -- výpočet faktoru vyvážení \\
 V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
-\textbf{Po aktualizace $u.b$ mohou nastat tyto případy:}
+\textbf{Po aktualizaci $u.b$ mohou nastat tyto případy:}
 \begin{itemize}
 \item $u.b = 1$ nebo $u.b = -1$\\
 Pokud $u$ je kořen, vkládání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 3.
@@ -638,7 +638,7 @@ Vkládaní úspěšně končí.
 \end{figure}
 
 \subsubsection{Odebírání}
-\indent\indent \textit{Odebírání} založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+\indent\indent \textit{Odebírání} je založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
 
 \newpage
 \noindent \textbf{Přesný postup odebírání:}
@@ -665,7 +665,7 @@ Rodiče uzlu, který nahradil $u$ uložíme do $u$.
 \end{itemize}
 {\bfseries\item  krok} -- výpočet faktoru vyvážení \\
 V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
-\textbf{Po aktualizace $u.b$ mohou nastat tyto případy:}
+\textbf{Po aktualizaci $u.b$ mohou nastat tyto případy:}
 \begin{itemize}
 \item $u.b = <-1,1>$\\
 Pokud $u$ je kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 4.
@@ -683,10 +683,104 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 
 \newpage
 \subsection{Červeno-černý strom}
-\indent\indent\textit{Červeno-černý strom} (zkratka ČČ)
- 
+\indent\indent\textit{Červeno-černý strom} (zkratka ČČ) vyvážený BVS. Na rozdíl od AVL stromu je ČČ strom vyvažován na základě barevného označení uzlů. Tímto vyvažováním má časovou složitost operací \textit{vkládání} a \textit{odebírání} $\theta(log (n))$.\\
+\indent\textit{\uv{Červeno-černý strom zajišťuje, že žádná cesta z kořene do libovolného listu stromu nebude dvakrát delší než kterákoli jiná, to znamená, že strom je přibližně vyvážený.}}\cite{dvorsky}\\
 
+\noindent\textbf{ČČ strom musí splňovat tyto vlastnosti:}
+\begin{itemize}
+\item Každý uzel má červenou nebo černou barvu.
+\item Kořen stromu má vždy barvu černou.
+\item Ve stromu se nenacházejí dva červené uzly jdoucí po sobě.
+\item Každý červený uzel, který není list, má dva černé potomky.
+\item Cesta od kořene ke všem listům obsahuje vždy stejný počet černých uzlů.\footnote{Je zde započítán i samotný list, pokud má černou barvu.} 
+\end{itemize}
 
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=1]{obrazky/17CCUkazka.png}
+	\caption{Ukázka vyváženého ČČ stromu}
+\end{figure}
+
+\newpage
+\noindent\textbf{Každý uzel ČČ stromu obsahuje tyto vlastnosti:}
+\begin{itemize}
+\item \textbf{Klíč} -- Hodnota uložená v uzlu.
+\item \textbf{Obarvení uzlu} -- Barva uzlu.
+\item \textbf{Ukazatel na levého potomka}
+\item \textbf{Ukazatel na pravého potomka}
+\item \textbf{Ukazatel na jednoho rodiče}
+\end{itemize}
+
+\subsubsection{Transformace}
+\indent\indent K obnově vyváženosti uzlů se používají \textit{transformace}. Používají se zde stejně jako u AVL stromu \textit{Rotace} a navíc je zde nová transformace \textit{přebarvení}. Tyto \textit{transformace} se používají k opětovnému vyvážení nevyváženého stromu.\\
+
+\noindent\textbf{Jednoduchá rotace RR}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/18RR.png}
+	\caption{Rotace RR}
+\end{figure}
+
+\noindent\textbf{Jednoduchá rotace LL}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/19LL.png}
+	\caption{Rotace LL}
+\end{figure}
+
+\newpage
+\noindent\textbf{Dvojitá rotace RL}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/20RL.png}
+	\caption{Rotace RL}
+\end{figure}
+
+\noindent\textbf{Dvojitá rotace LR}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/21LR.png}
+	\caption{Rotace LR}
+\end{figure}
+
+\noindent\textbf{Přebarvení + symetrické případy}\\
+Pokud má ten vyšší z dvojice červených po sobě jdoucích uzlů červeného sourozence, tak on i jeho sourozenec získá černou barvu a jejich rodič, pokud se nejedná o kořen, získá červenou barvu.\\
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/22Prebarveni.png}
+	\caption{Přebarvení 1}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/23Prebarveni.png}
+	\caption{Přebarvení 2}
+\end{figure}
+
+\subsubsection{Vyhledávání}
+\indent\indent \textit{Vyhledávání} u ČČ stromu se nijak neliší od toho v BVS.
+
+\newpage
+\subsubsection{Vkládání}
+\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok kontroly barev, kvůli vyvážení stromu. Pokud se ve stromu po vložení objeví dva po sobě jdoucí uzly s červenou barvou, provedeme příslušné transformace, aby strom splňoval vlastnosti ČČ stromu.\\
+\indent Každý nový uzel má automaticky při vkládání červenou barvu.\\
+
+\noindent \textbf{Přesný postup vkládání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- vyhledávání, vkládání \\
+Vložíme nový uzel $u$ na příslušné místo a $u$ nastavíme na předchůdce tohoto uzlu, je-li nový uzel kořen, nastavíme mu černou barvu a vkládání úspěšně končí.
+{\bfseries\item  krok} -- kontrola obarvení stromu \\
+Pokud má $u$ černou barvu, vkládání úspěšně končí. Jinak provedeme příslušnou transformaci:
+\begin{itemize}
+\item Rotaci\\
+Po provedení rotace se strom stává vyváženým a vkládání úspěšně končí.
+\item Přebarvení\\
+Po přebarvení nastavíme $u$ na předchůdce $u$.\\
+Pokud je nyní $u$ černý, tak se jedná o kořen a vkládání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$ a znovu provedeme krok 3.
+\end{itemize}
+\end{enumerate}
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
@@ -808,14 +902,18 @@ nebo v souboru \texttt{readme.txt}.
 
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
 
-\bibitem{BinarySearch} \uppercase{Binary Search Trees}
+\bibitem{BinarySearch} \uppercase{Finlayson}, Ian. Binary Search Trees [online]. [cit. 2018-07-07].
 Dostupné z: \url{http://cs.umw.edu/~finlayson/class/fall12/cpsc230/notes/17-binary-search-trees.html}
 
 \bibitem{Adelson} \uppercase{Adelson-Velskii}, G. M.; \uppercase{Landis}, E. M. An algorithm for the or-
 ganization of information. Soviet Mathematics Doklady, 3:1259–1263, 1962. [online]. [cit. 2018-07-07] Dostupné z: \url{http://professor.ufabc.edu.br/~jesus.mena/courses/mc3305-2q-2015/AED2-10-avl-paper.pdf}
 
+\bibitem{cormen} \uppercase{Cormen}, Thomas H.; \uppercase{Leiserson}, Charles E.; \uppercase{Rivest}, Ronald L.; \uppercase{Stein}, Clifford. Introduction to Algorithms, 978-0-262-03384-8, 1990. [online]. 2011-04-04  [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/Cormen-RB-trees.pdf}
+
 \bibitem{algorithms} \uppercase{Galles}, David. Data Structure Visualizations [online]. [cit. 2018-07-07]
 Dostupné z: \url{https://www.cs.usfca.edu/~galles/visualization/Algorithms.html}
+
+\bibitem{algorithms} ORACLE Java documentation [online]. [cit. 2018-07-07] Dostupné z: \url{https://docs.oracle.com/javase/8/javase-clienttechnologies.htm}
 
 \end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
