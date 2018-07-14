@@ -782,6 +782,51 @@ Pokud je nyní $u$ černý, tak se jedná o kořen a vkládání úspěšně kon
 \end{itemize}
 \end{enumerate}
 
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.55]{obrazky/24CCVlozeni.png}
+	\caption{Postup vkládání hodnoty 10}
+\end{figure}
+
+\subsubsection{Odebírání}
+\indent\indent \textit{Odebírání} je založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+
+\newpage
+\noindent \textbf{Přesný postup odebírání:}
+\begin{enumerate} {\bfseries
+\item  krok} -- počáteční \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- vyhledávání \\
+Stejně jako u BVS.
+{\bfseries\item  krok} -- odebírání \\\\
+\textbf{Odebírání $u$ má tyto možnosti:}
+\begin{itemize}
+\item Pokud $u$ je list. \\
+List $u$ může být odebrán. \\
+Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+\item $u$ má jednoho potomka. \\
+$u$ bude nahrazen podstromem potomka.
+Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+\item $u$ má dva potomky. 
+\begin{itemize}
+\item $u$ bude nahrazen \textit{nejlevějším} prvkem z \textit{pravého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
+\item $u$ bude nahrazen \textit{nejpravějším} prvkem z \textit{levého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
+\end{itemize}
+Rodiče uzlu, který nahradil $u$ uložíme do $u$.
+\end{itemize}
+{\bfseries\item  krok} -- výpočet faktoru vyvážení \\
+V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
+\textbf{Po aktualizaci $u.b$ mohou nastat tyto případy:}
+\begin{itemize}
+\item $u.b = <-1,1>$\\
+Pokud $u$ je kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 4.
+\item $u.b = 2$ nebo $u.b = -2$\\
+Provede se příslušná rotace.\\
+Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na předchůdce $u$ a znovu opakujeme krok 4.
+\end{itemize}
+\end{enumerate}
+
+
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
