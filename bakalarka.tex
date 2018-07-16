@@ -181,7 +181,7 @@
 
 \section{Úvod}
 \indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
-\indent Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
+\indent Text samotné práce se dělí na tři části: \textit{Teoretickou část} -- zabývá se teorií vybraných stromů, \textit{programovací část} -- popisuje architekturu a samotnou implementaci programu, a \textit{část s uživatelskou příručkou} --  zde je vysvětleno uživatelské prostředí a funkcionalita.
 
 \newpage
 \section{Stromy}
@@ -891,13 +891,33 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \end{figure}
 
 \newpage
-\section{Programovací jazyk a použité platformy}
+\section{Programátorská dokumentace}
+\indent\indent V této kapitole budou popsány technologie, které byly použity pro tvorbu aplikace. Dále zde bude popsána architektura a implementace programu.
+
+
+\subsection{Programovací jazyk a použité technologie}
 \indent\indent Program je napsán v jazyce Java, přesněji ve verzi 8. Na uživatelské prostředí je použita platforma JavaFX. Při výběru vhodného programového jazyka, pro tuto aplikaci byla pro mě důležitá zkušenost s tímto jazykem a taky přenositelnost mezi operačními systémy, protože aplikaci jsem psal střídavě ve Windows 10 a macOS 10.13 High Sierra. Pro psaní zdrojového kódu jsem použil vývojové prostředí Eclipse Oxygen.
 
-\subsection{Java}
-...
+\subsubsection{Java}
+\indent\indent \textit{Java} je objektově orientovaný programovací jazyk, který vznikl v roce 1995. Nyní je nově v březnu roku 2018 je ve verzi 10. Dle \textit{TIOBY indexu} se Java v poslední době nachází stále na 1. místě nejpoužívanějších programovacích jazyků.\cite{tioby} Program v Javě je možné spustit i bez instalace, stačí mít nainstalovanou správnou verzi JVM\footnote{Java Virtual Machine.}.
 
-\subsection{JavaFx}
+\subsubsection{JavaFX}
+\indent\indent Pro tvorbu grafického uživatelského prostředí (zkratka GUI) aplikace jsem využil \textit{JavaFX}. Je platforma pro tvorbu GUI v programech Java, která je součástí knihovny Java od verze 8. Nahrazuje zastaralý \textit{Swing}. \textit{JavaFX} navíc umožňuje tvorbu animací a podporuje stylování pomocí CSS\footnote{Cascading Style Sheets.}. 
+
+\subsubsection{FXML}
+\indent\indent\textit{FXML} je značkovací jazyk založen na jazyku \textsc{XML}\footnote{Extensible Markup Language.}. Tento jazyk se používá k návrhu GUI v JavaFX.
+
+\subsection{Architektura programu}
+
+\noindent \textbf{Program obsahuje tyto balíky:}
+\begin{itemize}
+\item \textbf{application}
+\item \textbf{graphic}
+\item \textbf{trees}
+\end{itemize}
+
+
+
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
@@ -1011,7 +1031,7 @@ nebo v souboru \texttt{readme.txt}.
 
 \begin{thebibliography}{99}	
 
-\bibitem{belohlavekALM} \uppercase{BĚlohlávek}, Radim. Algoritmická matematika 2 - část 1 [online]. 2012-05-15. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/algoritmicka-matematika-2-1.pdf}
+\bibitem{belohlavekALM} \uppercase{BĚlohlávek}, Radim. Algoritmická matematika 2 -- část 1 [online]. 2012-05-15. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/algoritmicka-matematika-2-1.pdf}
 
 \bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém. Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
 
@@ -1030,7 +1050,14 @@ ganization of information. Soviet Mathematics Doklady, 3:1259–1263, 1962. [onl
 \bibitem{algorithms} \uppercase{Galles}, David. Data Structure Visualizations [online]. [cit. 2018-07-07]
 Dostupné z: \url{https://www.cs.usfca.edu/~galles/visualization/Algorithms.html}
 
-\bibitem{algorithms} ORACLE Java documentation [online]. [cit. 2018-07-07] Dostupné z: \url{https://docs.oracle.com/javase/8/javase-clienttechnologies.htm}
+\bibitem{oracle} ORACLE Java documentation [online]. [cit. 2018-07-07] Dostupné z: \url{https://docs.oracle.com/javase/8/javase-clienttechnologies.htm}
+
+\bibitem{java} \uppercase{Bloch}, Joshua. Effective Java -- Second Edition, 978-0321356680, 2001.
+
+\bibitem{javafx} \uppercase{Pomalori}, Andreas. JavaFX Programming Cookbook [online]. [cit. 2018-07-07] Dostupné z: \url{https://www.javacodegeeks.com/minibook/javafx-programming-cookbook}
+
+\bibitem{tioby} \uppercase{Tioby} [online]. [cit. 2018-07-07] Dostupné z: \url{https://www.tiobe.com/tiobe-index/}
+
 
 \end{thebibliography}
 %% Bibliografie, včetně sazby, při nepoužití BibLaTeXu.
