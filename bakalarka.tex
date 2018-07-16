@@ -90,7 +90,7 @@
 %% práce). Jeden odstavec!
 \annotation{Cílem bakalářské práce bylo vytvořit nástroj pro podporu výuky algoritmizace, konkrétně práce se základními stromovými datovými strukturami (binární vyhledávací stromy, AVL stromy, červenočerné stromy). Výsledná aplikace podporuje vizualizaci vybraných datových struktur, včetně názorné demonstrace běžně prováděných operací s těmito datovými strukturami se souběžným zobrazením pseudokódu prováděné operace.}
 
-\annotation[english]{Toto mně doplní Míša... :D}
+\annotation[english]{}
 
 %% Klíčová slova práce, včetně anglických. Oddělená (obvykle) středníkem.
 \keywords{Binární vyhledávací stromy, Binární strom, AVL strom, Červenočerný strom, Stromové animace Java, JavaFX}
@@ -181,7 +181,7 @@
 
 \section{Úvod}
 \indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
-\indent Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{Programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
+\indent Text samotné práce se dělí na dvě části: \textit{Teoretickou část}, ve které se zabývám teorií vybraných stromů a \textit{programovou část}, která popisuje samotnou implementaci a funkcionalitu programu.\\
 
 \newpage
 \section{Stromy}
@@ -756,11 +756,11 @@ Pokud má ten vyšší z dvojice červených po sobě jdoucích uzlů červenéh
 	\includegraphics[scale=0.8]{obrazky/23Prebarveni.png}
 	\caption{Přebarvení 2}
 \end{figure}
-
+\newpage
 \subsubsection{Vyhledávání}
 \indent\indent \textit{Vyhledávání} u ČČ stromu se nijak neliší od toho v BVS.
 
-\newpage
+
 \subsubsection{Vkládání}
 \indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok kontroly barev, kvůli vyvážení stromu. Pokud se ve stromu po vložení objeví dva po sobě jdoucí uzly s červenou barvou, provedeme příslušné transformace, aby strom splňoval vlastnosti ČČ stromu.\\
 \indent Každý nový uzel má automaticky při vkládání červenou barvu.\\
@@ -784,14 +784,14 @@ Pokud je nyní $u$ černý, tak se jedná o kořen a vkládání úspěšně kon
 
 \begin{figure}[h!]
 \centering
-	\includegraphics[scale=0.55]{obrazky/24CCVlozeni.png}
+	\includegraphics[scale=0.57]{obrazky/24CCVlozeni.png}
 	\caption{Postup vkládání hodnoty 10}
 \end{figure}
 
 \subsubsection{Odebírání}
-\indent\indent \textit{Odebírání} je založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+\indent\indent \textit{Odebírání} u ČČ stromu je o trochu složitější, než u předchozích stromů. Je to způsobeno tím, že musíme zaručit dodržování počtu a umístění černých uzlů, aby po odstranění byla dále splněna vlastnost: \textit{cesta od kořene ke všem listům obsahuje vždy stejný počet černých uzlů.}\\
+\indent U \textit{odebírání} tedy musíme sledovat barvu odebíraného uzlu i těch, které nahrazují odebraný uzel. Pokud odebraný (přesunutý) černý uzel nahradí červený, tak získá černou barvu a strom zůstává vyvážený. Jinak na jeho původní místo vložíme do stromu \textit{dvojitě obarvený černý uzel s NULL hodnotou}. Tento uzel i samotné \textit{dvojité obarvení} nám značí, že je daný strom nevyvážený a pomocí transformací strom upravíme, aby jsme \textit{NULL uzel} i \textit{dvojité označení} odstranili a tím strom vyvážili.\\
 
-\newpage
 \noindent \textbf{Přesný postup odebírání:}
 \begin{enumerate} {\bfseries
 \item  krok} -- počáteční \\
@@ -802,30 +802,102 @@ Stejně jako u BVS.
 \textbf{Odebírání $u$ má tyto možnosti:}
 \begin{itemize}
 \item Pokud $u$ je list. \\
-List $u$ může být odebrán. \\
-Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+List $u$ odebereme.\\
+Pokud $u$ neměl černou barvu nebo se jednalo o kořen, odebírání úspěšně končí.
 \item $u$ má jednoho potomka. \\
-$u$ bude nahrazen podstromem potomka.
-Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na rodiče $u$.
+Do $u$ dosadíme hodnotu potomka. Pokud je potomek červený můžeme ho odstranit a odebírání úspěšně končí. Jinak $u$ nastavíme na tohoto potomka a znovu zopakujeme krok 3.
 \item $u$ má dva potomky. 
 \begin{itemize}
-\item $u$ bude nahrazen \textit{nejlevějším} prvkem z \textit{pravého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
-\item $u$ bude nahrazen \textit{nejpravějším} prvkem z \textit{levého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
+\item do $u$ dosadíme hodnotu z \textit{nejlevějšího} prvku z \textit{pravého} podstromu. Pokud je tento prvek červený, odstraníme ho a odebírání úspěšně končí. Jinak $u$ nastavíme na tento prvek a znovu zopakujeme krok 3.
+\item do $u$ dosadíme hodnotu z \textit{nejpravějšího} prvku z \textit{levého} podstromu. Pokud je tento prvek červený, odstraníme ho a odebírání úspěšně končí. Jinak $u$ nastavíme na tento prvek a znovu zopakujeme krok 3.
 \end{itemize}
-Rodiče uzlu, který nahradil $u$ uložíme do $u$.
 \end{itemize}
-{\bfseries\item  krok} -- výpočet faktoru vyvážení \\
-V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
-\textbf{Po aktualizaci $u.b$ mohou nastat tyto případy:}
-\begin{itemize}
-\item $u.b = <-1,1>$\\
-Pokud $u$ je kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na rodiče $u$ a znovu opakujeme krok 4.
-\item $u.b = 2$ nebo $u.b = -2$\\
-Provede se příslušná rotace.\\
-Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání úspěšně končí. Jinak $u$ nastavíme na předchůdce $u$ a znovu opakujeme krok 4.
-\end{itemize}
+{\bfseries\item  krok} -- Odstranění NULL listu \\
+V tomto kroku na místo aktuálním uzlu $u$ vložíme dvojitě obarvený NULL list. Dále pokračujeme odstraňováním dvojitě obarveného černého uzlu, které je vysvětleno níže.
 \end{enumerate}
 
+\newpage
+\noindent \textbf{Odstranění dvojitě obarveného černého uzlu:}\\
+
+\noindent \textit{\textbf{Případ 1} -- rotace + symetrické případy:}\\
+Pokud má dvojitě obarvený uzel černého sourozence, který má pravého nebo levého potomka červené barvy. Předchůdce dvojitě obarveného uzlu může mít jakoukoliv barvu a tuto barvu pak získá uzel, který se po dokončení rotace dostane na jeho místo.\\\\
+V obrázku \ref{pripad1} a \ref{pripad12} může před rotací uzel s hodnotou 8 mít černou barvu. Tuto barvu by po rotaci pak získal uzel s hodnotou 9.
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/25Pripad1.png}
+	\caption{Odstranění dvojitě obarveného uzlu -- jednoduchá rotace}
+	\label{pripad1}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/26Pripad1_2.png}
+	\caption{Odstranění dvojitě obarveného uzlu -- dvojitá rotace}
+	\label{pripad12}
+\end{figure}
+
+\newpage
+\noindent \textit{\textbf{Případ 2} -- přebarvení + symetrický případ:}\\
+Pokud sourozenec dvojitě obarveného uzlu je černý, ale nemá červené potomky a zároveň dvojitě obarvený uzel má červeného předchůdce.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/27Pripad2.png}
+	\caption{Odstranění dvojitě obarveného uzlu -- přebarvení}
+\end{figure}\\
+
+\noindent \textit{\textbf{Případ 3} -- přebarvení a přesun označení + symetrický případ:}\\
+Pokud sourozenec dvojitě obarveného uzlu je černý, ale nemá červené potomky a zároveň dvojitě obarvený uzel nemá červeného předchůdce.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/28Pripad3.png}
+	\caption{Odstranění dvojitě obarveného uzlu -- přebarvení a přesun označení}
+\end{figure}\\
+Pokud předchůdce dvojitě obarveného uzlu není kořen, tak získá dvojité obarvení a dále pokračujeme s odstraněním tohoto označení.\\\\
+
+\noindent \textit{\textbf{Případ 4} -- rotace (bez odstranění dvojitě obarveného uzlu) + symetrický případ:}\\
+Pokud sourozenec dvojitě obarveného uzlu je červený.
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/29Pripad4.png}
+	\caption{Rotace s dvojitě obarveným uzlem -- jednoduchá rotace}
+\end{figure}\\
+\newpage
+\noindent Po rotaci dále pokračujeme s odstraněním dvojitě obarveného uzlu.\\\\
+
+\noindent \textbf{Ukázka odebírání v ČČ stromu:}
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/30CCMazani.png}
+	\caption{Ukázka odebírání -- 1) odebrání 8}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/31CCMazani.png}
+	\caption{Ukázka odebírání -- 2) vložen NULL list}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/32CCMazani.png}
+	\caption{Ukázka odebírání -- 3) případ 4}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/33CCMazani.png}
+	\caption{Ukázka odebírání -- 4) případ 2}
+\end{figure}
+
+\newpage
+\section{Programovací jazyk a použité platformy}
+\indent\indent Program je napsán v jazyce Java, přesněji ve verzi 8. Na uživatelské prostředí je použita platforma JavaFX. Při výběru vhodného programového jazyka, pro tuto aplikaci byla pro mě důležitá zkušenost s tímto jazykem a taky přenositelnost mezi operačními systémy, protože aplikaci jsem psal střídavě ve Windows 10 a macOS 10.13 High Sierra. Pro psaní zdrojového kódu jsem použil vývojové prostředí Eclipse Oxygen.
+
+\subsection{Java}
+...
+
+\subsection{JavaFx}
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
