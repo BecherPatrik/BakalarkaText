@@ -911,12 +911,97 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \noindent \textbf{Program obsahuje tyto balíky:}
 \begin{itemize}
-\item \textbf{application}
-\item \textbf{graphic}
-\item \textbf{trees}
+\item application
+\item trees
+\item graphic
 \end{itemize}
 
+\subsubsection{Balík \textit{application}}
+\indent\indent Tento balík vytváří a má kontrolu nad GUI. Dále zprostředkovává komunikaci mezi logickou a grafickou částí programu. \\
 
+\noindent \textbf{Seznam souborů v balíku:}
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{Main.java}
+\item \kiinlinecode{Java}{!}{WindowController.java}
+\item \kiinlinecode{Java}{!}{styles.css}
+\item \kiinlinecode{Java}{!}{Window.fxml}
+\end{itemize}
+
+\smallskip
+\noindent \textbf{Třída Main}\\
+\indent Třída dědí z třídy \kiinlinecode{Java}{!}{Application}, třída která umožňuje vytvořit JavaFX aplikaci. Tato třída obsahuje funkci \kiinlinecode{Java}{!}{main(String[] args)}, což je hlavní funkce programu, která se spustí hned při spuštění aplikace. Poté se spustí funkce \kiinlinecode{Java}{!}{start(Stage primaryStage)}, která inicializuje GUI.\\
+
+\noindent \textbf{Třída WindowController}\\
+\indent Tato třída obsluhuje všechny prvky okna vytvořené v FXML. Pomocí anotace \textit{@FXML} získá tato třída reference na prvky GUI. Hlavní její činnost spočívá ve vykonávání metod, které jsou  v souboru \kiinlinecode{Java}{!}{Window.fxml} definovány pro prvky okna. Mezi hlavní metody navázané na prvky okna jsou: 
+
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{changeTree(ActionEvent event)} -- metoda pro změnu aktuálního stromu, ta volá další funkce, které připraví prostředí pro zvolený strom.
+
+\item \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} -- metody pro práci s aktuálním stromem, tyto metody zavolají příslušnou obsluhu aktuálního stromu \kiinlinecode{Java}{!}{tree}, což je objekt typu \kiinlinecode{Java}{!}{ITree} (\ref{ITree}). Tento objekt provede operaci s daným stromem a vrátí výsledek typu \kiinlinecode{Java}{!}{Result} (\ref{Result}). Ten je dále předán příslušné metodě objektu \kiinlinecode{Java}{!}{graphicTree} typu \kiinlinecode{Java}{!}{DrawingTree} (\ref{DrawingTree}).
+
+\item \kiinlinecode{Java}{!}{repeatLastAnimation} -- zaručuje obnovení předchozího stromu a zopakování poslední operace.
+
+\item \kiinlinecode{Java}{!}{dialogNewTree} -- obsluha pro tlačítko \textit{Nový...}, které vyvolá dialog pro možnosti nového stromu.
+
+\item \kiinlinecode{Java}{!}{checkEnableButtons} -- funkce, která aktivuje a deaktivuje tlačítka, podle logiky jejich možnosti použití (\textit{např. pokud je aktuální strom prázdný, je deaktivováno tlačítko Vyhledat a Smazat}).
+\end{itemize}
+
+\indent Její další činnost spočívá v komunikaci mezi logickou částí a grafickou částí programu. Což hlavně zajišťují již zmíněné metody: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()}. Navíc jsou zde funkce pro generování náhodného stromu: \kiinlinecode{Java}{!}{newRandomTree()} a \kiinlinecode{Java}{!}{generateRandomTreeList()}, nebo pro ukládání předchozího stromu a jeho následné obnovení: \kiinlinecode{Java}{!}{createHistory()}, \kiinlinecode{Java}{!}{createHistoryRecursion(Object object)} (\textit{pomocná metoda pro rekurzivní uložení rozložení hodnot v aktuálním stromu}) a \kiinlinecode{Java}{!}{getHistoryTree()}.\\
+
+\noindent \textbf{Soubor kaskádových stylů styles}\\
+\indent Obsahuje popis způsobu zobrazování elementů v okně aplikace. Tyto styly jsou zapsány podobně jako CSS styly pro jazyk \textit{HTML}, s tím rozdílem, že se před každou vlastnost známou ze stylování HTML stránek dává prefix -fx- např.:
+\begin{kicode}{CSS}{}{styles.css - ukázka}
+.menu-text, Label  {
+    -fx-font-size: 14.0pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-fill: white;
+}
+\end{kicode}
+
+\noindent Celá podrobná dokumentace CSS pro JavaFX aplikace je na adrese: \\
+\url{https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html}.\\
+
+\noindent \textbf{Soubor FXML Window}\\
+\indent V tomto FXML souboru je napsána celá struktura GUI aplikace, která je navázána na příslušný controller \kiinlinecode{Java}{!}{application.WindowController}. Jsou zde na jednotlivé elementy okna navázány příslušné metody pro obsloužení akcí s těmito elementy (\textit{např. pokud uživatel klikne na tlačítko Vložit, je zavolána metoda} \kiinlinecode{Java}{!}{insertNumber()} \textit{z třídy} \kiinlinecode{Java}{!}{WindowController}).
+
+\subsubsection{Balík trees}
+\indent\indent Tento balík se stará o logiku stromů. Jsou zde implementovány všechny stromy a jejich příslušné operace, které byly výše popsány.\\
+
+\noindent \textbf{Seznam tříd v balíku:}
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{ITree} -- interface\footnote{Rozhraní Java.}
+\item \kiinlinecode{Java}{!}{INode} -- interface
+\item \kiinlinecode{Java}{!}{BinaryTree}
+\item \kiinlinecode{Java}{!}{AVLTree}
+\item \kiinlinecode{Java}{!}{RedBlackTree}
+\item \kiinlinecode{Java}{!}{BinaryNode}
+\item \kiinlinecode{Java}{!}{AVLNode}
+\item \kiinlinecode{Java}{!}{RedBlackNode}
+\item \kiinlinecode{Java}{!}{RecordOfAnimation}
+\item \kiinlinecode{Java}{!}{Result}
+\item \kiinlinecode{Java}{!}{AnimatedAction} -- enum\footnote{Výčtový typ Javy.}
+\item \kiinlinecode{Java}{!}{Color} -- enum
+\item \kiinlinecode{Java}{!}{Side} -- enum
+\end{itemize}
+
+\smallskip
+\noindent \textbf{Interface ITree} \label{ITree}\\
+
+\noindent \textbf{Interface INode}\\
+
+\noindent \textbf{Třídy BinaryTree, AVLTree, RedBlackTree}\\
+
+\noindent \textbf{Třídy BinaryNode, AVLNode, RedBlackNode}\\
+
+\noindent \textbf{Třída RecordOfAnimation}\\
+
+\noindent \textbf{Třída Result} \label{Result}\\
+
+\noindent \textbf{Enum AnimatedAction}\\
+
+\noindent \textbf{Enum Color}\\
+
+\noindent \textbf{Enum Side}\\
 
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
