@@ -254,7 +254,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 
 \medskip
 \subsection{Binární vyhledávací strom}
-\indent\indent Binární \textit{vyhledávací} strom (zkratka BVS), je speciální typ binárního stromu, kde platí následující:
+\indent\indent Binární \textit{vyhledávací} strom (zkratka BVS) je speciální typ binárního stromu, kde platí následující:
 \begin{itemize}
 \item \textbf {Každý \textit{pravý} potomek $P$ rodiče $R$ má vyšší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > R.h$ $\Rightarrow$ Pravý podstrom uzlu $R$ obsahuje pouze uzly, které mají vyšší hodnotu než uzel $R$. 
 \item \textbf {Každý \textit{levý} potomek $L$ rodiče $R$ má nižší hodnotu $h$ než jeho rodič.} Platí tedy: $P.h > L.h$ $\Rightarrow$ Levý podstrom uzlu $R$ obsahuje pouze uzly, které mají nižší hodnotu než uzel $R$. 
@@ -334,7 +334,7 @@ Node search(int value, Node node) { //value je hledaná hodnota, node je při pr
 Na začátku vkládání je třeba určit aktuální uzel, který označíme $u$. Vkládanou hodnotu označíme $x$.\\
 V tomto kroku $u$ bude kořen stromu. Pokud strom nemá kořen, vytvoříme nový uzel s hodnotou $x$ a ten vložíme do stromu. Uzel se stane kořenem stromu, čímž vkládání končí.
 {\bfseries\item  krok} -- vyhledávání, vkládání \\
-Před vkládáním je nejprve nutno ověřit, zde se ve stromu nenachází uzel s hodnotou $x$.\\\\
+Před vkládáním je nejprve nutno ověřit, zda se ve stromu nenachází uzel s hodnotou $x$.\\\\
 \textbf{Vyhledávání může dopadnout těmito způsoby:}
 \begin{itemize}
 \item Prvek byl nalezen. \\
@@ -342,7 +342,7 @@ Pokud byl uzel s hodnotou $x$ nalezen, vkládání končí neúspěchem.
 \item Prvek nebyl nalezen, přičemž platí $x > u.h$\footnote{\label{hodnotaPosledniho}Hodnota posledního navštíveného uzlu při hledání.}.\\
 Vytvoříme nový uzel s hodnotou $x$ a vložíme jako pravého potomka $u$\footnote{\label{posledni}Poslední navštívený uzel při hledání.}.
 \item Prvek nebyl nalezen, přičemž platí $x < u.h$\footnoteref{hodnotaPosledniho}.\\
-Vytvoříme nový uzel s hodnotou $x$ a vložíme jako levého potomka $u$\footnoteref{posledni}
+Vytvoříme nový uzel s hodnotou $x$ a vložíme jako levého potomka $u$\footnoteref{posledni}.
 \end{itemize}
 \end{enumerate}
 
@@ -521,8 +521,8 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 \end{figure}
 
 \noindent\textbf{Faktor vyvážení}\\
-\indent Pro kontrolu dodržení pravidla o vyvážení, je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ 
-\indent Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání, může být $b$ 2 nebo -2, pak je ale nutné provést transformaci, která dosáhne vyvážení daného uzlu.
+\indent Pro kontrolu dodržení pravidla o vyvážení je třeba pro každý uzel zavést novou vlastnost \textit{faktor vyvážení uzlu}. Tuto vlastnost budeme značit $b$ (anglicky balance). $b$ obsahuje informaci o aktuálním vyvážení daného podstromu.\\ 
+\indent Nabývá hodnot <-2, 2>, přičemž uzel je vyvážený pokud jeho faktor $b$ je 1, 0 nebo -1. Při operaci přidávání nebo odebírání může být $b$ 2 nebo -2, pak je ale nutné provést transformaci, která dosáhne vyvážení daného uzlu.
 
 \begin{figure}[h!]
 \centering
@@ -532,7 +532,7 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 
 \newpage\noindent \textbf{Zdrojový kód rekurzivního výpočtu faktoru v jazyku Java:}
 
-\begin{kicode}{Java}{}{computeFactor}
+\begin{kicode}{Java}{computeFactor}{computeFactor}
 int computeFactor() {		
 	int lHeight = 0; //výška levého podstromu
 	int rHeight = 0; //výška pravého podstromu
@@ -568,7 +568,7 @@ int computeFactor() {
 \end{itemize}
 
 \subsubsection{Rotace}
-\indent\indent K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} pouze změní ukazatele uzlů v nevyvážené části stromu, aby došlo k opětovnému vyvážení. V AVL stromu se k vyvažování podle typu nevyvážené části stromu, používají tyto rotace:\\
+\indent\indent K obnově vyváženosti uzlů se používají \textit{rotace}. \textit{Rotace} pouze změní ukazatele uzlů v nevyvážené části stromu, aby došlo k opětovnému vyvážení. V AVL stromu se k vyvažování podle typu nevyvážené části stromu používají tyto rotace:\\
 
 \noindent\textbf{Jednoduchá rotace RR}\\
 \noindent Nevyvážený uzel má $b = 2$, jeho \textit{levý potomek} má $b = 0$ nebo $b = 1$.
@@ -607,7 +607,7 @@ int computeFactor() {
 \indent\indent \textit{Vyhledávání} u AVL stromu se nijak neliší od toho v BVS.
 
 \subsubsection{Vkládání}
-\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom kvůli vložení nového uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme.\\
+\indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde přidán krok aktualizace faktoru vyvážení, kde od nově vloženého uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom kvůli vložení nového uzlu stává nevyváženým, provedeme jednu z rotací, čímž daný strom vyvážíme.\\
 
 \newpage
 \noindent \textbf{Přesný postup vkládání:}
@@ -616,7 +616,7 @@ int computeFactor() {
 Stejně jako u BVS.
 {\bfseries\item  krok} -- vyhledávání, vkládání \\
 Novému uzlu po vložení nastavíme faktor vyvážení na 0 a $u$ nastavíme na předchůdce nově vloženého uzlu.\\
-Pokud nově vložený uzel je kořen vkládání úspěšně končí.
+Pokud nově vložený uzel je kořen, vkládání úspěšně končí.
 {\bfseries\item  krok} -- výpočet faktoru vyvážení \\
 V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
 \textbf{Po aktualizaci $u.b$ mohou nastat tyto případy:}
@@ -638,7 +638,7 @@ Vkládaní úspěšně končí.
 \end{figure}
 
 \subsubsection{Odebírání}
-\indent\indent \textit{Odebírání} je založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom, kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
+\indent\indent \textit{Odebírání} je založeno na stejnojmenné operaci u BVS. Navíc je zde jako u \textit{vkládání} přidán krok aktualizace faktoru vyvážení, kde od odstraněného uzlu postupně u určitých uzlů přepočítáváme $b$. Pokud se strom kvůli odebrání uzlu stává nevyváženým, tak provedeme jednu z rotací, čímž daný strom vyvážíme. 
 
 \newpage
 \noindent \textbf{Přesný postup odebírání:}
@@ -661,7 +661,7 @@ Pokud byl $u$ kořen, odebírání úspěšně končí. Jinak nastavíme $u$ na 
 \item $u$ bude nahrazen \textit{nejlevějším} prvkem z \textit{pravého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
 \item $u$ bude nahrazen \textit{nejpravějším} prvkem z \textit{levého} podstromu, zároveň tento prvek získá faktor vyvážení z $u$.
 \end{itemize}
-Rodiče uzlu, který nahradil $u$ uložíme do $u$.
+Rodiče uzlu, který nahradil $u$, uložíme do $u$.
 \end{itemize}
 {\bfseries\item  krok} -- výpočet faktoru vyvážení \\
 V tomto kroku v aktuálním uzlu $u$ aktualizujeme faktor vyvážení $b$.\\\\
@@ -690,7 +690,7 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 \begin{itemize}
 \item Každý uzel má červenou nebo černou barvu.
 \item Kořen stromu má vždy barvu černou.
-\item Ve stromu se nenacházejí dva červené uzly jdoucí po sobě.
+\item Ve stromu se nenacházejí dva po sobě jdoucí červené uzly.
 \item Každý červený uzel, který není list, má dva černé potomky.
 \item Cesta od kořene ke všem listům obsahuje vždy stejný počet černých uzlů.\footnote{Je zde započítán i samotný list, pokud má černou barvu.} 
 \end{itemize}
@@ -763,7 +763,7 @@ Pokud má ten vyšší z dvojice červených po sobě jdoucích uzlů červenéh
 
 \subsubsection{Vkládání}
 \indent\indent \textit{Vkládání} je založeno na \textit{vkládání} u BVS. Navíc je zde kvůli vyvážení stromu přidán krok kontroly barev. Pokud se ve stromu po vložení objeví dva po sobě jdoucí uzly s červenou barvou, provedeme příslušné transformace, aby strom splňoval vlastnosti ČČ stromu.\\
-\indent Každý nový uzel má automaticky při vkládání červenou barvu.\\
+\indent Každý nový uzel má při vkládáni automaticky červenou barvu.\\
 
 \noindent \textbf{Přesný postup vkládání:}
 \begin{enumerate} {\bfseries
@@ -790,7 +790,7 @@ Pokud je nyní $u$ černý, tak se jedná o kořen a vkládání úspěšně kon
 
 \subsubsection{Odebírání}
 \indent\indent \textit{Odebírání} u ČČ stromu je o trochu složitější než u předchozích stromů. Je to způsobeno tím, že musíme zaručit dodržování počtu a umístění černých uzlů, aby po odstranění byla dále splněna vlastnost: \textit{cesta od kořene ke všem listům obsahuje vždy stejný počet černých uzlů.}\\
-\indent U \textit{odebírání} tedy musíme sledovat barvu odebíraného uzlu i těch, které nahrazují odebraný uzel. Pokud odebraný (přesunutý) černý uzel nahradí červený, tak získá černou barvu a strom zůstává vyvážený. Jinak na jeho původní místo vložíme do stromu \textit{dvojitě obarvený černý uzel s NULL hodnotou}. Tento uzel i samotné \textit{dvojité obarvení} nám značí, že je daný strom nevyvážený a pomocí transformací strom upravíme, aby jsme \textit{NULL uzel} i \textit{dvojité označení} odstranili a tím strom vyvážili.\\
+\indent U \textit{odebírání} tedy musíme sledovat barvu odebíraného uzlu i těch, které nahrazují odebraný uzel. Pokud odebraný (přesunutý) černý uzel nahradí červený, získá černou barvu a strom zůstává vyvážený. Jinak na jeho původní místo vložíme do stromu \textit{dvojitě obarvený černý uzel s NULL hodnotou}. Tento uzel i samotné \textit{dvojité obarvení} nám značí, že je daný strom nevyvážený a pomocí transformací strom upravíme, aby jsme \textit{NULL uzel} i \textit{dvojité označení} odstranili a tím strom vyvážili.\\
 
 \noindent \textbf{Přesný postup odebírání:}
 \begin{enumerate} {\bfseries
@@ -896,13 +896,13 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 
 \subsection{Programovací jazyk a použité technologie}
-\indent\indent Program je napsán v jazyce Java, přesněji ve verzi 8. Na uživatelské prostředí je použita platforma JavaFX. Při výběru vhodného programového jazyka, pro tuto aplikaci byla pro mě důležitá zkušenost s tímto jazykem a taky přenositelnost mezi operačními systémy, protože aplikaci jsem psal střídavě ve Windows 10 a macOS 10.13 High Sierra. Pro psaní zdrojového kódu jsem použil vývojové prostředí Eclipse Oxygen.
+\indent\indent Program je napsán v jazyce Java, přesněji ve verzi 8. Na uživatelské prostředí je použita platforma JavaFX. Při výběru vhodného programového jazyka pro tuto aplikaci byla pro mě důležitá zkušenost s tímto jazykem a taky přenositelnost mezi operačními systémy, protože aplikaci jsem psal střídavě ve Windows 10 a macOS 10.13 High Sierra. Pro psaní zdrojového kódu jsem použil vývojové prostředí Eclipse Oxygen.
 
 \subsubsection{Java}
 \indent\indent \textit{Java} je objektově orientovaný programovací jazyk, který vznikl v roce 1995. Nyní je nově v březnu roku 2018 je ve verzi 10. Dle \textit{TIOBY indexu} se Java v poslední době nachází stále na 1. místě nejpoužívanějších programovacích jazyků.\cite{tioby} Program v Javě je možné spustit i bez instalace, stačí mít nainstalovanou správnou verzi JVM\footnote{Java Virtual Machine.}.
 
 \subsubsection{JavaFX}
-\indent\indent Pro tvorbu grafického uživatelského prostředí (zkratka GUI) aplikace jsem využil \textit{JavaFX}. Je platforma pro tvorbu GUI v programech Java, která je součástí knihovny Java od verze 8. Nahrazuje zastaralý \textit{Swing}. \textit{JavaFX} navíc umožňuje tvorbu animací a podporuje stylování pomocí CSS\footnote{Cascading Style Sheets.}. 
+\indent\indent Pro tvorbu grafického uživatelského prostředí (zkratka GUI) aplikace jsem využil \textit{JavaFX}. Je to platforma pro tvorbu GUI v programech Java, která je součástí knihovny Java od verze 8. Nahrazuje zastaralý \textit{Swing}. \textit{JavaFX} navíc umožňuje tvorbu animací a podporuje stylování pomocí CSS\footnote{Cascading Style Sheets.}. 
 
 \subsubsection{FXML}
 \indent\indent\textit{FXML} je značkovací jazyk založen na jazyku \textsc{XML}\footnote{Extensible Markup Language.}. Tento jazyk se používá k návrhu GUI v JavaFX.
@@ -929,10 +929,10 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \smallskip
 \noindent \textbf{Třída \textit{Main}}\\
-\indent Třída dědí z třídy \kiinlinecode{Java}{!}{Application}, třída která umožňuje vytvořit JavaFX aplikaci. Tato třída obsahuje funkci \kiinlinecode{Java}{!}{main(String[] args)}, což je hlavní funkce programu, která se spustí hned při spuštění aplikace. Poté se spustí funkce \kiinlinecode{Java}{!}{start(Stage primaryStage)}, která inicializuje GUI.\\
+\indent Třída dědí z třídy \kiinlinecode{Java}{!}{Application}, která umožňuje vytvořit JavaFX aplikaci. Tato třída obsahuje funkci \kiinlinecode{Java}{!}{main(String[] args)}, což je hlavní funkce programu, která se spustí hned při spuštění aplikace. Poté se spustí funkce \kiinlinecode{Java}{!}{start(Stage primaryStage)}, která inicializuje GUI.\\
 
 \noindent \textbf{Třída \textit{WindowController}}\\
-\indent Tato třída obsluhuje všechny prvky okna vytvořené v FXML. Pomocí anotace \textit{@FXML} získá tato třída reference na prvky GUI. Hlavní její činnost spočívá ve vykonávání metod, které jsou  v souboru \kiinlinecode{Java}{!}{Window.fxml} definovány pro prvky okna. Mezi hlavní metody navázané na prvky okna jsou: 
+\indent Tato třída obsluhuje všechny prvky okna vytvořené v FXML. Pomocí anotace \textit{@FXML} získá tato třída reference na prvky GUI. Její hlavní činnost spočívá ve vykonávání metod, které jsou  v souboru \kiinlinecode{Java}{!}{Window.fxml} definovány pro prvky okna. Mezi hlavní metody navázané na prvky okna jsou: 
 
 \begin{itemize}
 \item \kiinlinecode{Java}{!}{changeTree(ActionEvent event)} -- metoda pro změnu aktuálního stromu, ta volá další funkce, které připraví prostředí pro zvolený strom.
@@ -943,10 +943,10 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \item \kiinlinecode{Java}{!}{dialogNewTree} -- obsluha pro tlačítko \textit{Nový...}, které vyvolá dialog pro možnosti nového stromu.
 
-\item \kiinlinecode{Java}{!}{checkEnableButtons} -- funkce, která aktivuje a deaktivuje tlačítka, podle logiky jejich možnosti použití (\textit{např. pokud je aktuální strom prázdný, je deaktivováno tlačítko Vyhledat a Smazat}).
+\item \kiinlinecode{Java}{!}{checkEnableButtons} -- funkce, která aktivuje a deaktivuje tlačítka podle logiky jejich možnosti použití (\textit{např. pokud je aktuální strom prázdný, je deaktivováno tlačítko Vyhledat a Smazat}).
 \end{itemize}
 
-\indent Její další činnost spočívá v komunikaci mezi logickou částí a grafickou částí programu. Což hlavně zajišťují již zmíněné metody: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()}. Navíc jsou zde funkce pro generování náhodného stromu: \kiinlinecode{Java}{!}{newRandomTree()} a \kiinlinecode{Java}{!}{generateRandomTreeList()}, nebo pro ukládání předchozího stromu a jeho následné obnovení: \kiinlinecode{Java}{!}{createHistory()}, \kiinlinecode{Java}{!}{createHistoryRecursion(Object object)} (\textit{pomocná metoda pro rekurzivní uložení rozložení hodnot v aktuálním stromu}) a \kiinlinecode{Java}{!}{getHistoryTree()}.\\
+\indent Její další činnost spočívá v komunikaci mezi logickou a grafickou částí programu. Což hlavně zajišťují již zmíněné metody: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()}. Navíc jsou zde funkce pro generování náhodného stromu: \kiinlinecode{Java}{!}{newRandomTree()} a \kiinlinecode{Java}{!}{generateRandomTreeList()}, nebo pro ukládání předchozího stromu a jeho následné obnovení: \kiinlinecode{Java}{!}{createHistory()}, \kiinlinecode{Java}{!}{createHistoryRecursion(Object object)} (\textit{pomocná metoda pro rekurzivní uložení rozložení hodnot v aktuálním stromu}) a \kiinlinecode{Java}{!}{getHistoryTree()}.\\
 
 \noindent \textbf{Soubor kaskádových stylů \textit{styles}}\\
 \indent Obsahuje popis způsobu zobrazování elementů v okně aplikace. Tyto styly jsou zapsány podobně jako CSS styly pro jazyk \textit{HTML}, s tím rozdílem, že se před každou vlastnost známou ze stylování HTML stránek dává prefix -fx- např.:
@@ -958,7 +958,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 }
 \end{kicode}
 
-\noindent Celá podrobná dokumentace CSS pro JavaFX aplikace je na adrese: \\
+\noindent Celá podrobná dokumentace CSS pro JavaFX aplikace je dostupná na adrese: \\
 \url{https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html}.\\
 
 \noindent \textbf{Soubor FXML \textit{Window}}\\
@@ -985,8 +985,8 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \end{itemize}
 
 \smallskip
-\noindent \textbf{Interface \textit{ITree}} \label{ITree}\\
-\indent Toto rozhraní zobecňuje práci se stromy, kdy každý typ stromu implementuje toto rozhraní a tím prakticky většina metod nerozlišuje s jakým typem stromu pracuje, ale pouze používá objekt typu \kiinlinecode{Java}{!}{ITree} a volá metody, které jsou pro všechny typy stromů stejné. Kvůli tomuto rozhraní je zdrojový kód programu velmi zjednodušen a ušetřen o spoustu řádků, které by museli řešit pro každou operaci se stromem o jaký strom se jedná a pak teprve volat příslušné metody. Například již zmíněné metody třídy \kiinlinecode{Java}{!}{WindowController}: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) pracují pouze s objektem typu \kiinlinecode{Java}{!}{ITree}.\\
+\noindent \textbf{Rozhraní \textit{ITree}} \label{ITree}\\
+\indent Toto rozhraní zobecňuje práci se stromy, kdy každý typ stromu implementuje toto rozhraní a tím prakticky většina metod nerozlišuje s jakým typem stromu pracuje, ale pouze používá objekt typu \kiinlinecode{Java}{!}{ITree} a volá metody, které mají pro všechny typy stromů stejný název, ale rozdílnou implementaci. Kvůli tomuto rozhraní je zdrojový kód programu velmi zjednodušen a ušetřen o spoustu řádků, které by museli řešit pro každou operaci se stromem o jaký strom se jedná a pak teprve volat příslušné metody. Například již zmíněné metody třídy \kiinlinecode{Java}{!}{WindowController}: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) pracují pouze s objektem typu \kiinlinecode{Java}{!}{ITree}.\\
  Hlavní definované metody rozhraní jsou:
 
 \begin{itemize}
@@ -995,22 +995,93 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \item \kiinlinecode{Java}{!}{getRoot()} -- metoda vrátí kořen daného stromu typu  \kiinlinecode{Java}{!}{INode}.
 \end{itemize}
 
-\noindent \textbf{Interface \textit{INode}}\\
-
 \noindent \textbf{Třídy \textit{BinaryTree}, \textit{AVLTree}, \textit{RedBlackTree}}\\
+\indent Jsou to třídy, které reprezentují typy stromů. Implementují rozhraní \kiinlinecode{Java}{!}{ITree}, což zaručuje, že každá instance těchto tříd obsahuje všechny základní operace. Kvůli rozdílnému fungování těchto stromů musí každá z těchto tříd tyto operace implementovat po svém. \kiinlinecode{Java}{!}{BinaryTree} prakticky implementuje pouze metody definované v rozhraní \kiinlinecode{Java}{!}{ITree}, zatímco \kiinlinecode{Java}{!}{AVLTree} a \kiinlinecode{Java}{!}{RedBlackTree} obsahují metody navíc.\\
+\newpage
+\noindent Vybrané metody \kiinlinecode{Java}{!}{AVLTree}:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{balanceTree(Result result, AVLNode startNode)} -- metoda, která se volá kvůli vyvážení AVL stromu. Tato metoda ověří faktory vyvážení příslušných uzlů, jestliže je strom nevyvážený volá potřebnou rotaci. Metoda vrací objekt typu \kiinlinecode{Java}{!}{Result}.
+\item \kiinlinecode{Java}{!}{llBalance(Result result, AVLNode nodeB)},\\
+\kiinlinecode{Java}{!}{rrBalance(Result result, AVLNode nodeB)},\\
+\kiinlinecode{Java}{!}{lrBalance(Result result, AVLNode nodeC)},\\
+\kiinlinecode{Java}{!}{rlBalance(Result result, AVLNode nodeC)} -- metody, které provádí rotace. Vrací objekt typu \kiinlinecode{Java}{!}{Result}.
+\end{itemize}
+
+\noindent Vybrané metody \kiinlinecode{Java}{!}{RedBlackTree}:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{balanceTree(Result result, RedBlackNode startNode)} -- metoda, která se volá kvůli vyvážení ČČ stromu. V této metodě se ověří vyváženost stromu, případně je zde provedeno přebarvení, pokud je potřeba jsou volány i metody rotace. Metoda vrací objekt typu \kiinlinecode{Java}{!}{Result}.
+\item \kiinlinecode{Java}{!}{llBalance(Result result, RedBlackNode nodeB)},\\
+\kiinlinecode{Java}{!}{rrBalance(Result result, RedBlackNode nodeB)},\\
+\kiinlinecode{Java}{!}{lrBalance(Result result, RedBlackNode nodeC)},\\
+\kiinlinecode{Java}{!}{rlBalance(Result result, RedBlackNode nodeC)} -- metody, které provádí rotace  a s tím související přebarvení. Vrací objekt typu \kiinlinecode{Java}{!}{Result}. 
+\item \kiinlinecode{Java}{!}{doubleBlack(Result result, RedBlackNode parent, Side side)} -- tato funkce řeší odstranění dvojitě obarvených uzlů, které se mohou vyskytnou při operaci odebírání. Funkce vrací objekt typu \kiinlinecode{Java}{!}{Result}.
+\end{itemize}
+
+\noindent \textbf{Rozhraní \textit{INode}}\\
+\indent Rozhraní \kiinlinecode{Java}{!}{INode} obsahuje definice všech důležitých \kiinlinecode{Java}{!}{get} a \kiinlinecode{Java}{!}{set} metod, které jsou potřeba k práci s jakýmkoliv uzlem. Je zde definována i metoda \kiinlinecode{Java}{!}{equals(Object obj)}, která slouží k porovnávání uzlů. Toto rozhraní zobecňuje práci s uzly stromů a umožňuje měnit a číst atributy uzlů, aniž by muselo být známo o jaký typ stromu a tedy i uzlu se jedná.\\
 
 \noindent \textbf{Třídy \textit{BinaryNode}, \textit{AVLNode}, \textit{RedBlackNode}}\\
+\indent Reprezentují uzly stejnojmenných stromů. Implementují rozhraní \kiinlinecode{Java}{!}{INode}.\\
+\noindent Třídy obsahují tyto atributy:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{value} -- číselná hodnota uzlu.
+\item \kiinlinecode{Java}{!}{parent} -- ukazatel na rodiče.
+\item \kiinlinecode{Java}{!}{left} -- ukazatel na levého potomka.
+\item \kiinlinecode{Java}{!}{right} -- ukazatel na pravého potomka.
+\item \kiinlinecode{Java}{!}{graphicNode} -- grafická reprezentace uzlu.
+\item \kiinlinecode{Java}{!}{factor}(pouze u \kiinlinecode{Java}{!}{AVLNode}) -- číselná hodnota faktoru vyvážení.
+\item \kiinlinecode{Java}{!}{color}(pouze u \kiinlinecode{Java}{!}{RedBlackNode}) -- barva uzlu. Reprezentována pomocí výčtového typu \kiinlinecode{Java}{!}{Color}.
+\end{itemize}
+
+\noindent Třída \kiinlinecode{Java}{!}{AVLNode} navíc implementuje zmíněnou rekurzivní funkci \kiinlinecode{Java}{!}{computeFactor()} \ref{computeFactor}.\\
 
 \noindent \textbf{Třída \textit{RecordOfAnimation}}\\
+\indent Tato třída slouží k zaznamenávání animací, které budou následně zpracovány v grafické části aplikace.\\
+\noindent Třída obsahuje tyto atributy: 
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{action} -- typ animace reprezentovaný výčtovým typem \kiinlinecode{Java}{!}{AnimatedAction}.
+\item \kiinlinecode{Java}{!}{node} -- ukazatel na grafický uzel, kterého se daná animace týká. Tato proměnná je typu \kiinlinecode{Java}{!}{IGraphicNode} (\ref{IGraphicNode}).
+\item \kiinlinecode{Java}{!}{object} -- pomocná proměnná, která je používána na různé typy objektu podle druhu animace.
+\end{itemize}
 
 \noindent \textbf{Třída \textit{Result}} \label{Result}\\
+\indent Objekty této třídy jsou používány jako návratové hodnoty všech logických operací se stromy. Tento objekt má v sobě uloženy důležité informace pro následné zpracování všech grafických operací včetně animací. Ve třídě \kiinlinecode{Java}{!}{WindowController}metody:  \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) nejprve zavolají příslušnou metodu u aktuálního logického stromu typu \kiinlinecode{Java}{!}{ITree}, která vytvoří objekt typu \kiinlinecode{Java}{!}{Result}, do kterého  postupně uloží všechny animace potřebné ke grafickému zobrazení volané operace a tento objekt na závěr vrátí. Tyto metody vrácený výsledek dále předávají objektu typu \kiinlinecode{Java}{!}{DrawingTree} (\ref{DrawingTree}), který strom vykreslí a vykoná příslušné animace.\\
+\noindent Třída obsahuje tyto atributy: 
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{node} -- výsledný uzel dané operace reprezentován pomocí \kiinlinecode{Java}{!}{INode}.
+\item \kiinlinecode{Java}{!}{side} -- pozice výsledného uzlu (\textit{při vkládání je to například strana na kterou má být uzel vložen}), která je výčtového typu \kiinlinecode{Java}{!}{Side}. 
+\item \kiinlinecode{Java}{!}{way} -- seznam všech navštívených uzlů při provádění dané operace. Je typu \kiinlinecode{Java}{!}{ArrayList<IGraphicNode>}. Využívá se při animování vyhledávání uzlu. 
+\item \kiinlinecode{Java}{!}{recordOfAnimations} -- seznam záznamů všech animací. Je typu \kiinlinecode{Java}{!}{ArrayList<RecordOfAnimation>}. 
+\end{itemize}
 
-\noindent \textbf{Enum \textit{AnimatedAction}}\\
+\newpage
+\noindent Vybrané metody:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{addNodeToWay(IGraphicNode node)} -- přidává do kolekce \kiinlinecode{Java}{!}{way} navštívený uzel.
 
-\noindent \textbf{Enum \textit{Color}}\\
+\item \kiinlinecode{Java}{!}{addAnimation(AnimatedAction action, IGraphicNode node, Object object)} -- metoda, která přidá do \kiinlinecode{Java}{!}{recordOfAnimations} nový záznam animace.
+\end{itemize}
 
-\noindent \textbf{Enum \textit{Side}}\\
+\noindent \textbf{Výčtový typ \textit{AnimatedAction}}\\
+\indent Obsahuje například hodnoty: \kiinlinecode{Java}{!}{SEARCH, INSERT, DELETE,}\\ \kiinlinecode{Java}{!}{MOVEVALUE, MOVENODE, RR, LL, RL, LR}... a další.\\
 
+\noindent \textbf{Výčtový typ \textit{Color}}\\
+\indent Obsahuje hodnoty: \kiinlinecode{Java}{!}{RED, BLACK;}.\\
+
+\noindent \textbf{Výčtový typ \textit{Side}}\\
+\indent Obsahuje hodnoty: \kiinlinecode{Java}{!}{LEFT, RIGHT, NONE;}.\\
+
+\subsubsection{Balík \textit{graphic}}
+\indent \indent Tento balík se stará o grafické zobrazování stromů, animování všech operací a zobrazování zjednodušeného popisu.\\ 
+
+\noindent \textbf{Seznam souborů v balíku:}
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{IGraphicNode} -- interface
+\item \kiinlinecode{Java}{!}{AVLGraphicNode}
+\item \kiinlinecode{Java}{!}{BinaryGraphicNode}
+\item \kiinlinecode{Java}{!}{RedBlackGraphicNode}
+\item \kiinlinecode{Java}{!}{DrawingTree}
+\end{itemize}
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
