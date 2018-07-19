@@ -369,7 +369,7 @@ Vytvoříme nový uzel s hodnotou $x$ a vložíme jako levého potomka $u$\footn
 \begin{kicode}{Java}{}{Result - Třída}
 Class Result() {
 	private Node node; //poslední navštívený uzel (hledaný/rodič)
-	private boolean isFind; //parametr pro určení zda byl uzel nalezen
+	private boolean isFind; //atribut pro určení zda byl uzel nalezen
 	
 	public Result(Node node, boolean isFind) { //konstruktor
 		...
@@ -962,7 +962,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \url{https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html}.\\
 
 \noindent \textbf{Soubor FXML \textit{Window}}\\
-\indent V tomto FXML souboru je napsána celá struktura GUI aplikace, která je navázána na příslušný controller \kiinlinecode{Java}{!}{application.WindowController}. Jsou zde na jednotlivé elementy okna navázány příslušné metody pro obsloužení akcí s těmito elementy (\textit{např. pokud uživatel klikne na tlačítko Vložit, je zavolána metoda} \kiinlinecode{Java}{!}{insertNumber()} \textit{z třídy} \kiinlinecode{Java}{!}{WindowController}).
+\indent V tomto FXML souboru je napsána celá struktura GUI aplikace, která je navázána na příslušný controller \kiinlinecode{Java}{!}{application.WindowController}. Jsou zde na jednotlivé elementy okna navázány příslušné metody pro obsloužení akcí s těmito elementy (\textit{např. pokud uživatel klikne na tlačítko Vložit, je zavolána metoda} \kiinlinecode{Java}{!}{insertNumber()} \textit{z třídy} \kiinlinecode{Java}{!}{WindowController}).\\
 
 \subsubsection{Balík \textit{trees}}
 \indent\indent Tento balík se stará o logiku stromů. Jsou zde implementovány všechny stromy a jejich příslušné operace, které byly výše popsány.\\
@@ -986,8 +986,8 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \smallskip
 \noindent \textbf{Rozhraní \textit{ITree}} \label{ITree}\\
-\indent Toto rozhraní zobecňuje práci se stromy, kdy každý typ stromu implementuje toto rozhraní a tím prakticky většina metod nerozlišuje s jakým typem stromu pracuje, ale pouze používá objekt typu \kiinlinecode{Java}{!}{ITree} a volá metody, které mají pro všechny typy stromů stejný název, ale rozdílnou implementaci. Kvůli tomuto rozhraní je zdrojový kód programu velmi zjednodušen a ušetřen o spoustu řádků, které by museli řešit pro každou operaci se stromem o jaký strom se jedná a pak teprve volat příslušné metody. Například již zmíněné metody třídy \kiinlinecode{Java}{!}{WindowController}: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) pracují pouze s objektem typu \kiinlinecode{Java}{!}{ITree}.\\
- Hlavní definované metody rozhraní jsou:
+\indent Toto rozhraní zobecňuje práci se stromy, kdy každý typ stromu implementuje toto rozhraní a tím prakticky většina metod nerozlišuje s jakým typem stromu pracuje, ale pouze používá objekt typu \kiinlinecode{Java}{!}{ITree} a volá metody, které mají pro všechny typy stromů stejný název, ale rozdílnou implementaci. Kvůli tomuto rozhraní je zdrojový kód programu velmi zjednodušen a ušetřen o spoustu řádků, které by museli řešit pro každou operaci se stromem o jaký strom se jedná a pak teprve volat příslušné metody. Například již zmíněné metody třídy \kiinlinecode{Java}{!}{WindowController}: \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) pracují pouze s objektem typu \kiinlinecode{Java}{!}{ITree}.\\\\
+Hlavní definované metody rozhraní jsou:
 
 \begin{itemize}
 \item \kiinlinecode{Java}{!}{search(int value)},  \kiinlinecode{Java}{!}{insert(int value)}, \kiinlinecode{Java}{!}{delete(int value)} -- definice metod pro základní operace se stromy. Metody vrací objekt typu \kiinlinecode{Java}{!}{Result}.
@@ -1045,7 +1045,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \end{itemize}
 
 \noindent \textbf{Třída \textit{Result}} \label{Result}\\
-\indent Objekty této třídy jsou používány jako návratové hodnoty všech logických operací se stromy. Tento objekt má v sobě uloženy důležité informace pro následné zpracování všech grafických operací včetně animací. Ve třídě \kiinlinecode{Java}{!}{WindowController}metody:  \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) nejprve zavolají příslušnou metodu u aktuálního logického stromu typu \kiinlinecode{Java}{!}{ITree}, která vytvoří objekt typu \kiinlinecode{Java}{!}{Result}, do kterého  postupně uloží všechny animace potřebné ke grafickému zobrazení volané operace a tento objekt na závěr vrátí. Tyto metody vrácený výsledek dále předávají objektu typu \kiinlinecode{Java}{!}{DrawingTree} (\ref{DrawingTree}), který strom vykreslí a vykoná příslušné animace.\\
+\indent Objekty této třídy jsou používány jako návratové hodnoty všech logických operací se stromy. Tento objekt má v sobě uloženy důležité informace pro následné zpracování všech grafických operací včetně animací. Ve třídě \kiinlinecode{Java}{!}{WindowController}metody:  \kiinlinecode{Java}{!}{searchNumber()},  \kiinlinecode{Java}{!}{insertNumber()}, \kiinlinecode{Java}{!}{deleteNumber()} (\ref{zakladniMetody}) nejprve zavolají příslušnou metodu u aktuálního logického stromu typu \kiinlinecode{Java}{!}{ITree}. Ta vytvoří objekt typu \kiinlinecode{Java}{!}{Result}, do kterého  postupně uloží všechny animace potřebné ke grafickému zobrazení volané operace a tento objekt na závěr vrátí. Tyto metody vrácený výsledek dále předávají objektu typu \kiinlinecode{Java}{!}{DrawingTree} (\ref{DrawingTree}), který strom vykreslí a vykoná příslušné animace.\\
 \noindent Třída obsahuje tyto atributy: 
 \begin{itemize}
 \item \kiinlinecode{Java}{!}{node} -- výsledný uzel dané operace reprezentován pomocí \kiinlinecode{Java}{!}{INode}.
@@ -1082,6 +1082,84 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \item \kiinlinecode{Java}{!}{RedBlackGraphicNode}
 \item \kiinlinecode{Java}{!}{DrawingTree}
 \end{itemize}
+\smallskip
+\noindent \textbf{Rozhraní \textit{IGraphicNode}} \label{IGraphicNode}\\
+\indent Toto rozhraní definuje všechny důležité \kiinlinecode{Java}{!}{get}, \kiinlinecode{Java}{!}{set} a další metody, které jsou potřeba pro práci s jakýmkoliv objektem reprezentující grafický uzel zmíněných stromů. Je ním zobecněna práce třídy \kiinlinecode{Java}{!}{DrawingTree}, která může vykreslovat a provádět animace aniž by znala typ stromu.\\
+\indent Objekty typu \kiinlinecode{Java}{!}{IGraphicNode} reprezentují obecný grafických uzel všech stromů a jsou prakticky používány ve všech částech programu. Výjimečně jsou funkce, které jsou ale specifické pro určitý typ stromu, ty si objekty typu \kiinlinecode{Java}{!}{IGraphicNode} přetypují do \kiinlinecode{Java}{!}{BinaryGraphicNode}, \kiinlinecode{Java}{!}{AVLGraphicNode} nebo \kiinlinecode{Java}{!}{RedBlackGraphicNode} (\textit{Například u AVL stromu je potřeba změnit atribut} \kiinlinecode{Java}{!}{factor} \textit{který obsahuje a má k němu přístup pouze} \kiinlinecode{Java}{!}{AVLGraphicNode}).\\
+\newpage
+\noindent Hlavní definované metody jsou:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{createStackPaneNode()} -- vytvoří grafickou reprezentaci listu (\textit{vytvoří kruh a doprostřed vloží hodnotu listu to celé pak vloží do} \kiinlinecode{Java}{!}{StackPane}).
+\item \kiinlinecode{Java}{!}{highlightFindNode()} -- metoda pro zvýraznění nalezeného grafického uzlu.
+\item \kiinlinecode{Java}{!}{countChildren()} -- metoda které vypočítá a uloží počet všech pravých a levých potomků daného uzlu. Metoda vrací součet všech potomků. Používá se pro rozpočítání vzdáleností mezi uzly, aby se ve vykresleném stromu žádné nepřekrývaly. Implementace metody je zde \ref{countChildren}.
+\end{itemize}
+
+\noindent \textbf{Třída \textit{BinaryGraphicNode}}\\
+\indent Třída implementuje rozhraní \kiinlinecode{Java}{!}{IGraphicNode}. Reprezentuje grafický uzel stejnojmenného stromu. Pouze implementuje všechny metody z rozhraní. Obsahuje tyto atributy:
+\begin{itemize}
+\item \kiinlinecode{Java}{!}{radiusSize} -- velikost vykreslených uzlů. Hodnota je typu \kiinlinecode{Java}{!}{final int} inicializovaná na 20.
+\item \kiinlinecode{Java}{!}{parent} -- ukazatel na rodiče uzlu. Typu \kiinlinecode{Java}{!}{IGraphnicNode}.
+\item \kiinlinecode{Java}{!}{left} -- ukazatel na levého potomka. Typu \kiinlinecode{Java}{!}{IGraphnicNode}.
+\item \kiinlinecode{Java}{!}{right} -- ukazatel na pravého potomka. Typu \kiinlinecode{Java}{!}{IGraphnicNode}.
+\item \kiinlinecode{Java}{!}{side} -- pozice vůči rodiči. Výčtového typu \kiinlinecode{Java}{!}{Side}.
+\item \kiinlinecode{Java}{!}{leftChildrenCount} -- počet všech levých potomků.
+\item \kiinlinecode{Java}{!}{rightChildrenCount} -- počet všech pravých potomků.
+\item \kiinlinecode{Java}{!}{value} -- ukazatel na hodnotu uzlu. Typu \kiinlinecode{Java}{!}{Text}.
+\item \kiinlinecode{Java}{!}{circle} -- grafický prvek kruh o poloměru \kiinlinecode{Java}{!}{radiusSize}. Typu \kiinlinecode{Java}{!}{Circle}.
+\item \kiinlinecode{Java}{!}{stacPaneNode} -- \kiinlinecode{Java}{!}{StackPane}, který představuje grafický uzel. V něm je vložen objekt \kiinlinecode{Java}{!}{value} a \kiinlinecode{Java}{!}{circle}.
+\item \kiinlinecode{Java}{!}{x} -- souřadnice \kiinlinecode{Java}{!}{stacPaneNode} x. Typu \kiinlinecode{Java}{!}{DoubleProperty}.
+\item \kiinlinecode{Java}{!}{y} -- souřadnice \kiinlinecode{Java}{!}{stacPaneNode} y. Typu \kiinlinecode{Java}{!}{DoubleProperty}.
+\item \kiinlinecode{Java}{!}{branch} -- představuje větev\footnote{Spoj mezi uzlem a jeho rodičem.} mezi tímto uzlem a jeho rodičem. Typu \kiinlinecode{Java}{!}{Line}.
+\end{itemize}
+
+\begin{kicode}{Java}{countChildren}{countChildren()}
+@Override
+public int countChildren() {
+	if (left != null) {
+		leftChildrenCount = 1 + left.countChildren();
+	} else {
+		leftChildrenCount = 0;
+	}
+
+	if (right != null) {
+		rightChildrenCount = 1 + right.countChildren();
+	} else {
+		rightChildrenCount = 0;
+	}
+		
+	return leftChildrenCount + rightChildrenCount;
+}
+\end{kicode}
+
+\newpage
+\noindent \textbf{Třídy \textit{AVLGraphicNode} a \textit{RedBlackGraphicNode}}\\
+\indent Tyto třídy dědí ze třídy \kiinlinecode{Java}{!}{BinaryGraphicNode} $=>$ zároveň pro ně automaticky platí, že implementují rozhraní \kiinlinecode{Java}{!}{IGraphicNode}. Tyto třídy reprezentují grafické uzly svých stejnojmenných stromů, ale prakticky se od \kiinlinecode{Java}{!}{BinaryGraphicNode} příliš neliší. \\
+\indent \kiinlinecode{Java}{!}{AVLGraphicNode} pouze přidává atribut \kiinlinecode{Java}{!}{factor} a k němu příslušnou \kiinlinecode{Java}{!}{get} a \kiinlinecode{Java}{!}{set} metodu. Faktor vyvážení je reprezentován objektem typu \kiinlinecode{Java}{!}{Text}. Tento atribut následně vloží do zděděného atributu \kiinlinecode{Java}{!}{stackNode}.\\ 
+\indent \kiinlinecode{Java}{!}{RedBlackGraphicNode} používá červenou a černou barvu výplně zděděného atributu \kiinlinecode{Java}{!}{circle}, kvůli tomu je přidán atribut \kiinlinecode{Java}{!}{color} výčtového typu \kiinlinecode{Java}{!}{Color} a jeho příslušnou \kiinlinecode{Java}{!}{get} a \kiinlinecode{Java}{!}{set} metodu. Dále přidává metodu pro označení dvojitě obarveného listu.\\
+
+\noindent \textbf{Třída \textit{DrawingTree}} \label{DrawingTree}\\
+\indent Nejrozsáhlejší třída aplikace, která ovládá grafické zobrazování všech stromů, animací a zobrazování popisku aktuálně prováděných operací. \kiinlinecode{Java}{!}{WindowController} při vytvoření nového stromu vytvoří objekt \kiinlinecode{Java}{!}{graphicTree}, který je instancí \kiinlinecode{Java}{!}{DrawingTree}. Objektu \kiinlinecode{Java}{!}{graphicTree} jsou pak pomocí metod předávány výsledky (typu \kiinlinecode{Java}{!}{Result}) zpracovaných operací v logické reprezentaci stromu. Tyto výsledky jsou následně graficky zpracovány a po provedení poslední animace je program připraven na přijímání dalších požadavků od uživatele.\\
+
+\noindent Parametry konstruktoru:
+\begin{enumerate}
+\item \kiinlinecode{Java}{!}{paneTree} -- ukazatel na prvek okna typu \kiinlinecode{Java}{!}{Pane}, do kterého se stromy budou kreslit.
+\item \kiinlinecode{Java}{!}{speed} -- ukazatel na \kiinlinecode{Java}{!}{property}\footnote{Vlastnost objektu v JavaFX, které lze \textit{naslouchat} a reagovat na změny. Tyto vlastnosti jsou obvykle typovány na typ objektu, který uchovávají např. \kiinlinecode{Java}{!}{DoubleProperty}. Jdou propojit (\textit{nabindovat}) s jinými property stejného typu $=>$ pokud se změní hodnota v property, tak se změní i hodnota ve všech, které jsou s ní propojeny.} prvku okna typu \kiinlinecode{Java}{!}{Slider}. Parametr je typu \kiinlinecode{Java}{!}{DoubleProperty}. Tato hodnota reprezentuje aktuální zvolenou hodnotu uživatelem pomocí \textit{slideru} pro nastavení rychlosti animace.
+\item \kiinlinecode{Java}{!}{stageWidthProperty} -- ukazatel na \kiinlinecode{Java}{!}{property} šířku okna aplikace. Je typu \kiinlinecode{Java}{!}{ReadOnlyDoubleProperty}.
+\item \kiinlinecode{Java}{!}{stageHeightProperty} -- ukazatel na \kiinlinecode{Java}{!}{property} výšku okna aplikace. Je typu \kiinlinecode{Java}{!}{ReadOnlyDoubleProperty}.
+\item \kiinlinecode{Java}{!}{WindowController} -- ukazatel na samotný objekt \kiinlinecode{Java}{!}{WindowController}, který tento konstruktor volá. To proto, aby tato třída měla přístup k metodám pro deaktivování prvků okna při průběhu animace. 
+\end{enumerate}
+
+\begin{kicode}{Java}{}{Ukázka použití konstruktoru třídy DrawingTree}
+/**
+* window - je okno aplikace
+* this -  WindowController ve kterém je tento konstruktor volán
+*/
+g = new DrawingTree(paneTree, sliderSpeed.valueProperty(), window.widthProperty(), window.heightProperty(), this); 
+\end{kicode}
+
+
+//TODO 
+Tuto skutečnost využívám např. při pozicování kořenu stromu doprostřed okna. DoubleProperty x kořenu propojím s atributem stageWidthProperty a tím měním pozici celého stromu na základě změny šířky okna. 
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
