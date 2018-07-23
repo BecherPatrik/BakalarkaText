@@ -58,6 +58,8 @@
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
 \makeatother
 
+\usepackage[section]{placeins}
+
 %% Informace pro úvodní strany. V jazyku práce (pokud není v komentáři
 %% uvedeno česky) a anglicky. Uveďte všechny, u kterých není v
 %% komentáři uvedeno, že jsou volitelné. Při neuvedení se použijí
@@ -88,7 +90,7 @@
 
 %% Anotace práce, včetně anglické (obvykle překlad z jazyka
 %% práce). Jeden odstavec!
-\annotation{Cílem bakalářské práce bylo vytvořit nástroj pro podporu výuky algoritmizace, konkrétně práce se základními stromovými datovými strukturami (binární vyhledávací stromy, AVL stromy, červenočerné stromy). Výsledná aplikace podporuje vizualizaci vybraných datových struktur, včetně názorné demonstrace běžně prováděných operací s těmito datovými strukturami se souběžným zobrazením pseudokódu prováděné operace.}
+\annotation{Cílem bakalářské práce bylo vytvořit nástroj pro podporu výuky algoritmizace, konkrétně práce se základními stromovými datovými strukturami (binární vyhledávací stromy, AVL stromy, červeno-černé stromy). Výsledná aplikace podporuje vizualizaci vybraných datových struktur, včetně názorné demonstrace běžně prováděných operací s těmito datovými strukturami se souběžným zobrazením pseudokódu prováděné operace.}
 
 \annotation[english]{}
 
@@ -170,11 +172,6 @@
 %% Vlastní text závěrečné práce. Pro povinné závěry, před přílohami,
 %% použijte prostředí kiconclusions. Povinná je i příloha s obsahem
 %% přiloženého CD/DVD.
-
-%% -------------------------------------------------------------------
-
-%% Zatim neoddelat zjistit co to je.
-% \newcommand{\BibLaTeX}{\textsc{Bib}\LaTeX}
 
 %-------------------------------------------------------------
 % Strana 7
@@ -1260,17 +1257,90 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 
 
 \clearpage
-\subsection{Uživatelská příručka}
+\section{Uživatelská příručka}
+\indent \indent Uživatelská příručka obsahuje návod, který popisuje jak aplikaci spustit a její funkčnost. Jsou zde popsány i všechny komponenty okna a práci s nimi. 
 
+\subsection{Minimální požadavky aplikace}
+\begin{itemize}
+\item Windows 10 nebo macOS 10.12 Sierra.
+\item JVM verze 8.
+\item Rozlišení obrazovky aspoň 1366$\times$768.
+\end{itemize}
 
+\subsection{Spuštění}
+\indent \indent Aplikaci není třeba instalovat. Před samotným spuštěním je pouze potřeba mít nainstalovaný JVM verze 8, který dostupný z adresy: \url{https://java.com/en/download/}. Samotnou aplikaci \textsc{Stromy.jar()} stačí zkopírovat z adresáře \texttt{bin/} a spustit.
 
+\subsection{Okno aplikace}
+\indent \indent Po spuštění se zobrazí hlavní okno programu viz. obrázek \ref{hlavniOkno}. V titulku okna je název aktuálně zvoleného stromu.
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.5]{obrazky/34Program.png}
+	\caption{Hlavní okno programu.}
+	\label{hlavniOkno}
+\end{figure}
+
+\newpage
+\subsubsection{Popis okna aplikace} 
+\begin{enumerate}
+\item Menu -- slouží k výběru stromu viz. obrázek \ref{menu}. Aktuální strom je v menu zvýrazněn bílou barvou. Po vybrání stromu se objeví dialogové okno \ref{dialogMenu}. Menu skryjeme po kliknutí na položku \textit{Zpět}.
+\item Textové pole -- pro uživatelské zadávání číselných hodnot. Rozmezí čísla je 0 až 10 000. Při zadání čísla se automaticky tlačítka, které je možné v daném případě použít stávají aktivními. 
+\item Tlačítko \textit{Vložit} -- slouží ke vkládání uživatelem zadané hodnoty do aktuálního zobrazeného stromu. Je aktivní vždy, pokud uživatel zadá nějakou hodnotu.
+\item Tlačítko \textit{Hledat} -- slouží k hledání uživatelem zadané hodnoty v aktuálním zobrazeném stromu. Je aktivní, pokud strom má alespoň kořen a textové pole obsahuje nějakou uživatelem zadanou hodnotu.
+\item Tlačítko \textit{Smazat} -- slouží k odebírání uzlu s uživatelem zadanou hodnotou v aktuálně zobrazeném stromu. Je aktivní, pokud strom má alespoň kořen a textové pole obsahuje nějakou uživatelem zadanou hodnotu
+\item Tlačítko \textit{Nový...} -- po kliknutí zobrazí dialog \ref{dialogNovy}. V tomto dialogu je možno aktuální strom vymazat nebo vytvořit náhodný strom. Při výběru \textit{Nový náhodný...} se zobrazí dialog \ref{dialogNahodny}, kde zadáme počet hodnot ve stromě a po potvrzení je strom vytvořen.
+\item Kreslící plocha -- zde je vykreslován strom, jsou zde i prováděny animace.
+\item Popis operací -- stručný popis aktuálně prováděných operací, který si lze pročíst i po provedení animace. Tento popis lze přesunout, pomocí chytnutí šedého okraje, kamkoliv po kreslící ploše programu. 
+\item Rychlost animací -- před prováděním animace, lze vybrat její rychlost, případně i animace vypnout. 
+\item Tlačítko \textit{Opakuj poslední krok} -- po kliknutí na tlačítko se zopakuje poslední provedená operace. Toto tlačítko je aktivní, pokud je uložená nějaká předchozí operace.
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=1]{obrazky/35Menu.png}
+	\caption{Menu programu.}
+	\label{menu}
+\end{figure}
+
+\newpage \noindent Dialogové okna aplikace:
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/37Dialog2.png}
+	\caption{Dialogové okno při změně stromu.}
+	\label{dialogMenu}
+\end{figure}
+
+\begin{figure}[t!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/36Dialog.png}
+	\caption{Dialogové okno navázané na tlačítko \textit{Nový...}.}
+	\label{dialogNovy}
+\end{figure}
+								
+\begin{figure}[h]
+\centering
+	\includegraphics[scale=0.8]{obrazky/38Dialog3.png}
+	\caption{Dialogové okno pro náhodný strom.}
+	\label{dialogNahodny}
+\end{figure}
+
+\FloatBarrier
+\subsubsection{Klávesové zkratky}
+Při zadávání hodnoty do textového pole, je možné volat operace pomocí klávesových zkratek:
+\begin{itemize}
+\item \textit{ENTER} -- zavolá operaci \textit{Vložit}.
+\item \textit{F} -- zavolá operaci \textit{Hledat}.
+\item \textit{DELETE} -- zavolá operaci \textit{Smazat}.
+\end{itemize}
 
 %% Závěry práce. V jazyce práce a anglicky. Text pro jiný než
 %% nastavený jazyk práce (nepovinným parametrem language makra
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
 %% jazyka jako nepovinného parametru.
 \begin{kiconclusions}
-Závěr práce v \uv{českém} jazyce.
+\indent \indent Výsledkem bakalářské práce je aplikace \textsc{Stromy}, která může sloužit k potřebě výuky \textit{Binárních vyhledávacích}, \textit{AVL} a \textit{červeno-černých stromů}. Aplikace názorně animuje operace \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání}. Tyto operace jsou zároveň stručně popsány, navíc je možnost je znovu zopakovat, což umožňuje lepší pochopení dané operace.\\
+\indent Aplikace je naprogramována s důrazem na jednoduchost a obecnost. Toto zobecnění hlavních částí programu umožňuje v budoucnu doprogramovat další typy stromů, aniž by se musela předělávat celá aplikace. 
+
 \end{kiconclusions}
 
 \begin{kiconclusions}[english]
@@ -1280,11 +1350,11 @@ Thesis conclusions in \uv{English}.
 %% Přílohy obsahu textu práce, za makrem \appendix.
 \appendix
 
-\section{První příloha}
-Text první přílohy
+%%\section{První příloha}
+%%Text první přílohy
 
-\section{Druhá příloha}
-Text druhé přílohy
+%%\section{Druhá příloha}
+%%Text druhé přílohy
 
 %% Obsah přiloženého CD/DVD. Poslední příloha. Upravte podle vlastní
 %% práce!
@@ -1297,13 +1367,7 @@ souborů apod.
 \begin{description}
 
 \item[\texttt{bin/}] \hfill \\
-  Instalátor \textsc{Instalator} programu, popř.~program
-  \textsc{Program}, spustitelné přímo z~CD/DVD. / Kompletní adresářová
-  struktura webové aplikace \textsc{Webovka} (v~ZIP archivu) pro
-  zkopírování na webový server. Adresář obsahuje i~všechny runtime
-  knihovny a~další soubory potřebné pro bezproblémový běh instalátoru
-  a~programu z~CD/DVD / pro bezproblémový provoz webové aplikace na
-  webovém serveru.
+  Program \textsc{Stromy}, spustitelné přímo z~CD/DVD. 
 
 \item[\texttt{doc/}] \hfill \\
   Text práce ve formátu PDF, vytvořený s~použitím závazného stylu KI
@@ -1313,40 +1377,20 @@ souborů apod.
   obrázky, apod.
 
 \item[\texttt{src/}] \hfill \\
-  Kompletní zdrojové texty programu \textsc{Program} / webové aplikace
-  \textsc{Webovka} se všemi potřebnými (příp.~převzatými) zdrojovými
-  texty, knihovnami a~dalšími soubory potřebnými pro bezproblémové
-  vytvoření spustitelných verzí programu / adresářové struktury pro
-  zkopírování na webový server.
+  Kompletní zdrojové kódy programu \textsc{Stromy}.
 
 \item[\texttt{readme.txt}] \hfill \\
-  Instrukce pro instalaci a~spuštění programu \textsc{Program}, včetně
-  všech požadavků pro jeho bezproblémový provoz. / Instrukce pro
-  nasazení webové aplikace \textsc{Webovka} na webový server, včetně
-  všech požadavků pro její bezproblémový provoz, a~webová adresa, na
-  které je aplikace nasazena pro účel testování při tvorbě posudků
-  práce a~pro účel obhajoby práce.
+  Instrukce pro instalaci a~spuštění programu \textsc{Stromy}, včetně
+  všech požadavků pro jeho bezproblémový provoz.
 
 \end{description}
 
 Navíc CD/DVD obsahuje:
 
 \begin{description}
-
-\item[\texttt{data/}] \hfill \\
-  Ukázková a~testovací data použitá v~práci a~pro potřeby testování
-  práce při tvorbě posudků a~obhajoby práce.
-
-\item[\texttt{install/}] \hfill \\
-  Instalátory aplikací, runtime knihoven a~jiných souborů potřebných
-  pro provoz programu \textsc{Program} / webové aplikace
-  \textsc{Webovka}, které nejsou standardní součástí operačního
-  systému určeného pro běh programu / provoz webové aplikace.
-
 \item[\texttt{literature/}] \hfill \\
   Vybrané položky bibliografie, příp.~jiná užitečná literatura
   vztahující se k~práci.
-
 \end{description}
 
 U~veškerých cizích převzatých materiálů obsažených na CD/DVD jejich
