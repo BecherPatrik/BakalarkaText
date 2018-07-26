@@ -234,7 +234,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \end{definition}
 \smallskip
 
-\noindent\textbf{Každý uzel obsahuje tyto vlastnosti:}
+\noindent\textbf{Každý uzel obsahuje vlastnosti:}
 \begin{itemize}
 \item \textbf{Klíč} -- Hodnota uložená v uzlu.
 \item \textbf{Ukazatel na levého potomka}
@@ -1082,13 +1082,13 @@ Hlavní definované metody rozhraní jsou:
 \smallskip
 \noindent \textbf{Rozhraní \textit{IGraphicNode}} \label{IGraphicNode}\\
 \indent Toto rozhraní definuje všechny důležité \kiinlinecode{Java}{!}{get}, \kiinlinecode{Java}{!}{set} a další metody, které jsou potřeba pro práci s jakýmkoliv objektem reprezentující grafický uzel zmíněných stromů. Je ním zobecněna práce třídy \kiinlinecode{Java}{!}{DrawingTree}, která může vykreslovat a provádět animace aniž by znala typ stromu.\\
-\indent Objekty typu \kiinlinecode{Java}{!}{IGraphicNode} reprezentují obecný grafických uzel všech stromů a jsou prakticky používány ve všech částech programu. Výjimku tvoří funkce, které jsou specifické pro určitý typ stromu, ty si objekty typu \kiinlinecode{Java}{!}{IGraphicNode} přetypují do \kiinlinecode{Java}{!}{BinaryGraphicNode}, \kiinlinecode{Java}{!}{AVLGraphicNode} nebo \kiinlinecode{Java}{!}{RedBlackGraphicNode} (\textit{Například u AVL stromu je potřeba změnit atribut} \kiinlinecode{Java}{!}{factor} \textit{který obsahuje a má k němu přístup pouze} \kiinlinecode{Java}{!}{AVLGraphicNode}).\\
+\indent Objekty typu \kiinlinecode{Java}{!}{IGraphicNode} reprezentují obecný grafických uzel všech stromů a jsou prakticky používány ve všech částech programu. Výjimku tvoří funkce, které jsou specifické pro určitý typ stromu, ty si objekty typu \kiinlinecode{Java}{!}{IGraphicNode} přetypují do \kiinlinecode{Java}{!}{BinaryGraphicNode}, \kiinlinecode{Java}{!}{AVLGraphicNode} nebo \kiinlinecode{Java}{!}{RedBlackGraphicNode} (\textit{Například u AVL stromu je potřeba změnit atribut} \kiinlinecode{Java}{!}{factor} \textit{, který obsahuje a má k němu přístup pouze} \kiinlinecode{Java}{!}{AVLGraphicNode}).\\
 \newpage
 \noindent Hlavní definované metody jsou:
 \begin{itemize}
-\item \kiinlinecode{Java}{!}{createStackPaneNode()} -- vytvoří grafickou reprezentaci listu (\textit{vytvoří kruh a doprostřed vloží hodnotu listu to celé pak vloží do} \kiinlinecode{Java}{!}{StackPane}).
+\item \kiinlinecode{Java}{!}{createStackPaneNode()} -- vytvoří grafickou reprezentaci listu (\textit{vytvoří kruh a doprostřed vloží hodnotu listu, to celé pak vloží do} \kiinlinecode{Java}{!}{StackPane}).
 \item \kiinlinecode{Java}{!}{highlightFindNode()} -- metoda pro zvýraznění nalezeného grafického uzlu.
-\item \kiinlinecode{Java}{!}{countChildren()} -- metoda které vypočítá a uloží počet všech pravých a levých potomků daného uzlu. Metoda vrací součet všech potomků. Používá se pro rozpočítání vzdáleností mezi uzly, aby se ve vykresleném stromu žádné nepřekrývaly. Implementace metody je zde \ref{countChildren}.
+\item \kiinlinecode{Java}{!}{countChildren()} -- metoda, které vypočítá a uloží počet všech pravých a levých potomků daného uzlu. Metoda vrací součet všech potomků. Používá se pro rozpočítání vzdáleností mezi uzly, aby se ve vykresleném stromu žádné nepřekrývaly. Implementace metody je zde \ref{countChildren}.
 \end{itemize}
 
 \noindent \textbf{Třída \textit{BinaryGraphicNode}}\\
@@ -1258,7 +1258,7 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 
 \clearpage
 \section{Uživatelská příručka}
-\indent \indent Uživatelská příručka obsahuje návod, který popisuje jak aplikaci spustit a její funkčnost. Jsou zde popsány i všechny komponenty okna a práci s nimi. 
+\indent \indent Uživatelská příručka obsahuje návod, který popisuje jak aplikaci spustit a její funkčnost. Jsou zde popsány i všechny komponenty okna a práce s nimi. 
 
 \subsection{Minimální požadavky aplikace}
 \begin{itemize}
