@@ -1283,7 +1283,16 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 \newpage
 \subsubsection{Popis okna aplikace} 
 \begin{enumerate}
-\item Menu -- slouží k výběru stromu viz. obrázek \ref{menu}. Aktuální strom je v menu zvýrazněn bílou barvou. Po vybrání stromu se objeví dialogové okno \ref{dialogMenu}. Menu skryjeme po kliknutí na položku \textit{Zpět}.
+\item Menu -- slouží k výběru stromu viz. obrázek \ref{menu}. Aktuální strom je v menu zvýrazněn bílou barvou. Při vybrání stromu se objeví dialogové okno \ref{dialogMenu}. Menu skryjeme po kliknutí na položku \textit{Zpět}.\\\\
+\noindent Další funkce menu:
+\begin{itemize}
+\item \textit{Nový} -- Smaže aktuální strom, může zobrazit dialogové okno \ref{dialogMenuNovy}.
+\item \textit{Načíst...} -- Zobrazí standardní okno pro výběr umístění uloženého souboru \textit{název.tree}. Načítání může zobrazit dialog \ref{dialogMenuNacist} nebo chybovou hlášku \ref{dialogChyba1}.
+\item \textit{Uložit...} -- Zobrazí standardní okno pro výběr umístění a názvu ukládaného souboru. Na dané místo uloží aktuální strom jako \textit{název.tree}. Ukládání může zobrazit chybovou hlášku \ref{dialogChyba2}. 
+\item \textit{Exportovat jako obrázek...} -- Zobrazí standardní okno pro výběr umístění a názvu obrázku. Na dané místo uloží obrázek aktuálního stromu jako \textit{název.png}.
+\item \textit{Ukončit} -- Ukončí aplikaci.
+\end{itemize}
+
 \item Textové pole -- pro uživatelské zadávání číselných hodnot. Rozmezí čísla je 0 až 10 000. Při zadání čísla se automaticky tlačítka, které je možné v daném případě použít stávají aktivními. 
 \item Tlačítko \textit{Vložit} -- slouží ke vkládání uživatelem zadané hodnoty do aktuálního zobrazeného stromu. Je aktivní vždy, pokud uživatel zadá nějakou hodnotu.
 \item Tlačítko \textit{Hledat} -- slouží k hledání uživatelem zadané hodnoty v aktuálním zobrazeném stromu. Je aktivní, pokud strom má alespoň kořen a textové pole obsahuje nějakou uživatelem zadanou hodnotu.
@@ -1310,19 +1319,51 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 	\label{dialogMenu}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/38Dialog4.png}
+	\caption{Dialogové okno kliknutí na \textit{Nový} v menu.}
+	\label{dialogMenuNovy}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/41Dialog7.png}
+	\caption{Dialogové okno při načítání stromu.}
+	\label{dialogMenuNacist}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/39Dialog5}
+	\caption{Chyba při načítání uloženého stromu.}
+	\label{dialogChyba1}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+	\includegraphics[scale=0.8]{obrazky/40Dialog6.png}
+	\caption{Chyba při ukládání stromu.}
+	\label{dialogChyba2}
+\end{figure}
+
+
+\begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/36Dialog.png}
 	\caption{Dialogové okno navázané na tlačítko \textit{Nový...}.}
 	\label{dialogNovy}
 \end{figure}
 								
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/38Dialog3.png}
 	\caption{Dialogové okno pro náhodný strom.}
 	\label{dialogNahodny}
 \end{figure}
+
+
+
 
 \FloatBarrier
 \subsubsection{Klávesové zkratky}
