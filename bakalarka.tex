@@ -95,8 +95,8 @@
 \annotation[english]{}
 
 %% Klíčová slova práce, včetně anglických. Oddělená (obvykle) středníkem.
-\keywords{Binární vyhledávací stromy, Binární strom, AVL strom, Červeno-černý strom, Stromové animace Java, JavaFX}
-\keywords[english]{Binary search trees, Binary tree, AVL tree, Red-black tree, Tree animations, Java, JavaFX}
+\keywords{Binární vyhledávací strom, Binární strom, AVL strom, Červeno-černý strom}
+\keywords[english]{Binary search tree, Binary tree, AVL tree, Red-black tree}
 
 %% Volitelná specifikace příloh textu práce, i anglicky. Výchozí je '1
 %% CD/DVD'.
@@ -220,7 +220,7 @@
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.6]{obrazky/2PopisStromu.png}
-	\caption{Popis stromu}
+	\caption{Popis struktury stromu}
 \end{figure}
 
 \begin{definition}[$m$-ární stromy]
@@ -245,7 +245,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/3BinarniStrom.png}
-	\caption{Binární strom}
+	\caption{Příklad zobrazení binárního stromu}
 \end{figure}
 
 
@@ -263,7 +263,7 @@ Kořenový strom se nazývá $m$\textit{-ární}, právě když každý jeho vrc
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.7]{obrazky/4BinarniVyhledavaciStrom.png}
-	\caption{Rozdílné výšky stromu}
+	\caption{BVS - stejné hodnoty, ale rozdílná výška }
 	\label{binary}
 \end{figure}
 
@@ -296,14 +296,14 @@ Hledaná hodnota $x$ byla nalezena v $u$. Vyhledávání tedy končí.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/5BinarniVyhledavani.png}
-	\caption{Postup vyhledávání hodnoty 5}
+	\caption{BVS - postup vyhledávání hodnoty 5}
 	\label{binarySearch}
 \end{figure}
 
 \medskip \medskip \medskip
 \noindent \textbf{Zdrojový kód vyhledávání v jazyku Java:}
 
-\begin{kicode}{Java}{kod:searchBinary}{search}
+\begin{kicode}{Java}{kod:searchBinary}{search - funkce vyhledávání v BVS}
 Node search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen
 	if (node == null) {
 		return null; //uzel nebyl nalezen
@@ -349,21 +349,21 @@ Vytvoříme nový uzel s hodnotou $x$ a vložíme jako levého potomka $u$\footn
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani1.png}
-	\caption{Postup vkládání hodnoty 6 - hledání}
+	\caption{BVS - postup vkládání hodnoty 6 -- hledání}
 	\label{binarySearchInsert}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.9]{obrazky/6BinarniVkladani2.png}
-	\caption{Postup vkládání hodnoty 6 - vložení}
+	\caption{BVS - postup vkládání hodnoty 6 -- vložení}
 	\label{binaryInsert}
 \end{figure}
 
 \newpage
 \noindent \textbf{Zdrojový kód vkládání v jazyku Java:}\\\\
 \noindent Před samotnou funkcí \kiinlinecode{Java}{!}{insert} je třeba vytvořit třídu \kiinlinecode{Java}{!}{Result}, která bude dále použita:
-\begin{kicode}{Java}{}{Result - Třída}
+\begin{kicode}{Java}{}{Result - třída pro reprezentaci výsledku}
 Class Result() {
 	private Node node; //poslední navštívený uzel (hledaný/rodič)
 	private boolean isFind; //atribut pro určení zda byl uzel nalezen
@@ -378,7 +378,7 @@ Class Result() {
 \newpage
 \noindent Dále je potřeba trochu poupravit již známou funkci \kiinlinecode{Java}{!}{search} \ref{kod:searchBinary}:
 
-\begin{kicode}{Java}{}{search - úprava}
+\begin{kicode}{Java}{}{search - úprava funkce vyhledávání s použitím Result}
 Result search(int value, Node node) { //value je hledaná hodnota, node je při prvním volání kořen	
 	if (value > node.getValue()) { 
 		if (node.getRight() != null) { 
@@ -400,7 +400,7 @@ Result search(int value, Node node) { //value je hledaná hodnota, node je při 
 
 \noindent Nyní funkce \kiinlinecode{Java}{!}{insert}:
 
-\begin{kicode}{Java}{}{insert}
+\begin{kicode}{Java}{}{insert - funkce vkládání v BVS}
 Node insert(int value) {
 	Result result = search(value); //nejprve vyhledáme value		
 	if (result.isFind()) { //pokud byl uzel s danou hodnotou nalezen
@@ -454,13 +454,13 @@ $u$ bude nahrazen podstromem potomka.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.7]{obrazky/7BinarniMazani.png}
-	\caption{Postup odebírání hodnoty 4}
+	\caption{BVS - postup odebírání hodnoty 4}
 	\label{binaryDelete}
 \end{figure}
 
 \newpage\noindent \textbf{Zdrojový kód\footnote{Tento kód je pouze zjednodušená implementace k lepšímu pochopení odebírání.} odebírání v jazyku Java:}\\\\
 
-\begin{kicode}{Java}{}{delete}
+\begin{kicode}{Java}{}{delete - funkce pro odebírání v BVS}
 boolean delete(int value) {
 	Node removeNode = result.getNode();
 	Node helpNode; //pomocná proměnná
@@ -513,7 +513,7 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.3]{obrazky/8AVLVyvazenyStrom.png}
-	\caption{Vyvážený strom}
+	\caption{Vlastnosti vyváženého stromu}
 	\label{vyvazenyStrom}
 \end{figure}
 
@@ -529,7 +529,7 @@ Strom je vyvážený tehdy a jen tehdy, je-li rozdíl výšek každého uzlu nej
 
 \newpage\noindent \textbf{Zdrojový kód rekurzivního výpočtu faktoru v jazyku Java:}
 
-\begin{kicode}{Java}{computeFactor}{computeFactor}
+\begin{kicode}{Java}{computeFactor}{computeFactor - funkce pro výpočet faktoru vyvážení v AVL stromu}
 int computeFactor() {		
 	int lHeight = 0; //výška levého podstromu
 	int rHeight = 0; //výška pravého podstromu
@@ -572,7 +572,7 @@ int computeFactor() {
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/11RR.png}
-	\caption{Rotace RR}
+	\caption{AVL - jednoduchá rotace RR}
 \end{figure}
 
 \noindent\textbf{Jednoduchá rotace LL}\\
@@ -580,7 +580,7 @@ int computeFactor() {
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/12LL.png}
-	\caption{Rotace LL}
+	\caption{AVL - jednoduchá rotace LL}
 \end{figure}
 
 \newpage
@@ -589,7 +589,7 @@ int computeFactor() {
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/13RL.png}
-	\caption{Rotace RL}
+	\caption{AVL - dvojitá rotace RL}
 \end{figure}
 
 \noindent\textbf{Dvojitá rotace LR}\\
@@ -597,7 +597,7 @@ int computeFactor() {
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/14LR.png}
-	\caption{Rotace LR}
+	\caption{AVL - dvojitá rotace LR}
 \end{figure}
 
 \subsubsection{Vyhledávání}
@@ -631,7 +631,7 @@ Vkládaní úspěšně končí.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.55]{obrazky/15AVLVlozeni.png}
-	\caption{Postup vkládání hodnoty 5}
+	\caption{AVL - postup vkládání hodnoty 5}
 \end{figure}
 
 \subsubsection{Odebírání}
@@ -675,7 +675,7 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.55]{obrazky/16AVLOdebirani.png}
-	\caption{Postup odebírání hodnoty 1}
+	\caption{AVL - postup odebírání hodnoty 1}
 \end{figure}
 
 \newpage
@@ -715,14 +715,14 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/18RR.png}
-	\caption{Rotace RR}
+	\caption{ČČ - jednoduchá rotace RR}
 \end{figure}
 
 \noindent\textbf{Jednoduchá rotace LL}
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/19LL.png}
-	\caption{Rotace LL}
+	\caption{ČČ - jednoduchá LL}
 \end{figure}
 
 \newpage
@@ -730,14 +730,14 @@ Pokud po provedení rotace je $u.b = 0$ nebo je nyní $u$ kořen, odebírání �
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/20RL.png}
-	\caption{Rotace RL}
+	\caption{ČČ - dvojitá rotace RL}
 \end{figure}
 
 \noindent\textbf{Dvojitá rotace LR}
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/21LR.png}
-	\caption{Rotace LR}
+	\caption{ČČ - dvojitá rotace LR}
 \end{figure}
 
 \noindent\textbf{Přebarvení + symetrické případy}\\
@@ -745,13 +745,13 @@ Pokud má ten vyšší z dvojice červených po sobě jdoucích uzlů červenéh
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/22Prebarveni.png}
-	\caption{Přebarvení 1}
+	\caption{ČČ - přebarvení 1}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/23Prebarveni.png}
-	\caption{Přebarvení 2}
+	\caption{ČČ - přebarvení 2}
 \end{figure}
 \newpage
 \subsubsection{Vyhledávání}
@@ -782,7 +782,7 @@ Pokud je nyní $u$ černý, tak se jedná o kořen a vkládání úspěšně kon
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.57]{obrazky/24CCVlozeni.png}
-	\caption{Postup vkládání hodnoty 10}
+	\caption{ČČ - postup vkládání hodnoty 10}
 \end{figure}
 
 \subsubsection{Odebírání}
@@ -823,14 +823,14 @@ V obrázku \ref{pripad1} a \ref{pripad12} může před rotací uzel s hodnotou 8
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/25Pripad1.png}
-	\caption{Odstranění dvojitě obarveného uzlu -- jednoduchá rotace}
+	\caption{ČČ - odstranění dvojitě obarveného uzlu -- jednoduchá rotace}
 	\label{pripad1}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/26Pripad1_2.png}
-	\caption{Odstranění dvojitě obarveného uzlu -- dvojitá rotace}
+	\caption{ČČ - odstranění dvojitě obarveného uzlu -- dvojitá rotace}
 	\label{pripad12}
 \end{figure}
 
@@ -840,7 +840,7 @@ Pokud sourozenec dvojitě obarveného uzlu je černý, ale nemá červené potom
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/27Pripad2.png}
-	\caption{Odstranění dvojitě obarveného uzlu -- přebarvení}
+	\caption{ČČ - odstranění dvojitě obarveného uzlu -- přebarvení}
 \end{figure}\\
 
 \noindent \textit{\textbf{Případ 3} -- přebarvení a přesun označení + symetrický případ:}\\
@@ -848,7 +848,7 @@ Pokud sourozenec dvojitě obarveného uzlu je černý, ale nemá červené potom
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/28Pripad3.png}
-	\caption{Odstranění dvojitě obarveného uzlu -- přebarvení a přesun označení}
+	\caption{ČČ - odstranění dvojitě obarveného uzlu -- přebarvení a přesun označení}
 \end{figure}\\
 Pokud předchůdce dvojitě obarveného uzlu není kořen, tak získá dvojité obarvení a dále pokračujeme s odstraněním tohoto označení.\\\\
 
@@ -857,7 +857,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/29Pripad4.png}
-	\caption{Rotace s dvojitě obarveným uzlem -- jednoduchá rotace}
+	\caption{ČČ - rotace s dvojitě obarveným uzlem -- jednoduchá rotace}
 \end{figure}\\
 \newpage
 \noindent Po rotaci dále pokračujeme s odstraněním dvojitě obarveného uzlu.\\\\
@@ -866,25 +866,25 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/30CCMazani.png}
-	\caption{Ukázka odebírání -- 1) odebrání 8}
+	\caption{ČČ - ukázka odebírání -- 1) odebrání 8}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/31CCMazani.png}
-	\caption{Ukázka odebírání -- 2) vložen NULL list}
+	\caption{ČČ - ukázka odebírání -- 2) vložen NULL list}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/32CCMazani.png}
-	\caption{Ukázka odebírání -- 3) případ 4}
+	\caption{ČČ - ukázka odebírání -- 3) případ 4}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 	\includegraphics[scale=0.8]{obrazky/33CCMazani.png}
-	\caption{Ukázka odebírání -- 4) případ 2}
+	\caption{ČČ - ukázka odebírání -- 4) případ 2}
 \end{figure}
 
 \newpage
@@ -947,7 +947,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \noindent \textbf{Soubor kaskádových stylů \textit{styles}}\\
 \indent Obsahuje popis způsobu zobrazování elementů v okně aplikace. Tyto styly jsou zapsány podobně jako CSS styly pro jazyk \textit{HTML}, s tím rozdílem, že se před každou vlastnost známou ze stylování HTML stránek dává prefix -fx- např.:
-\begin{kicode}{CSS}{}{styles.css - ukázka}
+\begin{kicode}{CSS}{}{styles.css - ukázka zápisu}
 .menu-text, Label  {
     -fx-font-size: 14.0pt;
     -fx-font-family: "Segoe UI Light";
@@ -1109,7 +1109,7 @@ Hlavní definované metody rozhraní jsou:
 \item \kiinlinecode{Java}{!}{branch} -- představuje větev\footnote{Spoj mezi uzlem a jeho rodičem.} mezi tímto uzlem a jeho rodičem. Typu \kiinlinecode{Java}{!}{Line}.
 \end{itemize}
 
-\begin{kicode}{Java}{countChildren}{countChildren()}
+\begin{kicode}{Java}{countChildren}{countChildren() - rekurzivní funkce pro určení počtu potomků}
 @Override
 public int countChildren() {
 	if (left != null) {
@@ -1193,7 +1193,7 @@ Třída má spoustu atributů, které jsou hlavně využívány funkcemi týkaj�
 \item Dále jsou zde implementovány metody na příslušné animace: \\\kiinlinecode{Java}{!}{deleteNodeAnimation()}, \kiinlinecode{Java}{!}{moveNodeAnimation()}, \kiinlinecode{Java}{!}{moveValueAnimation()}, \kiinlinecode{Java}{!}{updateFactor()}, \kiinlinecode{Java}{!}{rrAnimation()}, \kiinlinecode{Java}{!}{rlAnimation()}, \kiinlinecode{Java}{!}{llAnimation()},\\\kiinlinecode{Java}{!}{lrAnimation()}.
 \end{itemize}
 
-\begin{kicode}{Java}{souradnice}{Ukázka určení souřadnic nově vloženého uzlu.}
+\begin{kicode}{Java}{souradnice}{Ukázka určení souřadnic nově vloženého uzlu}
 DoubleProperty x = new SimpleDoubleProperty();
 DoubleProperty y = new SimpleDoubleProperty();
 
@@ -1238,7 +1238,7 @@ private void nextAnimation() {
 
 
 
-\begin{kicode}{Java}{balance}{Ukázka výpočtu správného umístění uzlu.}
+\begin{kicode}{Java}{balance}{Ukázka výpočtu správného umístění uzlu}
 xAnimatedNode = new SimpleDoubleProperty();
 IGraphicNode iGraphicNode = listGraphicNodes.get(balanceIndex);		
 
@@ -1268,7 +1268,7 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 \end{itemize}
 
 \subsection{Spuštění}
-\indent \indent Aplikaci není třeba instalovat. Před samotným spuštěním je pouze potřeba mít nainstalovaný JVM verze 8, který dostupný z adresy: \url{https://java.com/en/download/}. Samotnou aplikaci \textsc{Stromy.jar()} stačí zkopírovat z adresáře \texttt{bin/} a spustit.
+\indent \indent Aplikaci není třeba instalovat. Před samotným spuštěním je pouze potřeba mít nainstalovaný JVM verze 8, který dostupný z adresy: \url{https://java.com/en/download/}. Samotnou aplikaci \textsc{Stromy.jar} stačí zkopírovat z adresáře \texttt{bin/} a spustit.
 
 \subsection{Okno aplikace}
 \indent \indent Po spuštění se zobrazí hlavní okno programu viz. obrázek \ref{hlavniOkno}. V titulku okna je název aktuálně zvoleného stromu.
