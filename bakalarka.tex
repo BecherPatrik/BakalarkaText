@@ -177,12 +177,14 @@
 % Strana 7
 
 \section{Úvod}
-\indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci} a \textit{Generování náhodných stromů}.\\
-\indent Text samotné práce se dělí na tři části: \textit{Teoretickou část} -- zabývá se teorií vybraných stromů, \textit{programovací část} -- popisuje architekturu a samotnou implementaci programu, a \textit{část s uživatelskou příručkou} --  zde je vysvětleno uživatelské prostředí a funkcionalita.
-
+\indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Tyto stromy jsem vybral ze seznamu stromů zmíněných v zadání bakalářské práce. Kvůli časové náročnosti implementace a testování animací těchto stromů, jsem byl bohužel nucen opustit od původní koncepce programu, který byl připraven na podporu všech zmíněných datových struktur.\\
+\indent Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{Opakovat poslední operaci}, \textit{Ukládání a načítání}, \textit{Exportování stromu do obrázku} a \textit{Generování náhodných stromů}.\\
+\indent Datová struktura \textit{strom} je v informatice velmi často využívána, hlavně jako způsob ukládání dat, kde má následné vyhledávání velmi dobrou časovou složitost. Kvůli této skutečnosti je důležité, aby každý programátor tyto struktury znal. K samotnému pochopení těchto stromů jsem i já osobně využíval různé programy, které umožňovali graficky vytvářet a provádět operace s těmito stromy. To byla pro mě motivace, abych si vybral bakalářskou práci na toto téma a mohl vytvořit obdobnou aplikaci jako ty, které jsem používal při učení. \\
+\indent Text samotné práce se dělí na tři části: \textit{teoretickou část} -- zabývá se teorií vybraných stromů, \textit{programovací část} -- popisuje architekturu a samotnou implementaci programu, a \textit{část s uživatelskou příručkou} --  zde je vysvětleno uživatelské prostředí a funkcionalita.\\
 \newpage
 \section{Stromy}
-\indent \indent V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\
+\indent \indent V kapitole jsou vysvětleny základní pojmy, které jsou nezbytné k pochopení vlastností \textit{stromů} obsažených v aplikaci. V podkapitolách jsou osvětleny principy pro tvorbu a následnou práci s konkrétními \textit{binárními vyhledávacími stromy}. Využitím těchto principů byl naprogramován tento výukový nástroj.\\ 
+\indent Kapitola včetně podkapitol vychází z publikací \cite{belohlavekALM}, \cite{belohlavekVychodil}, \cite{vecerka}, \cite{dvorsky}, \cite{BinarySearch}, \cite{Adelson} a \cite{cormen}.
 
 
 \begin{definition}[Strom]
@@ -889,7 +891,7 @@ Pokud sourozenec dvojitě obarveného uzlu je červený.
 
 \newpage
 \section{Programátorská dokumentace}
-\indent\indent V této kapitole budou popsány technologie, které byly použity pro tvorbu aplikace. Dále zde bude popsána architektura a implementace programu.
+\indent\indent V této kapitole budou popsány technologie, které byly použity pro tvorbu aplikace. Dále zde bude popsána architektura a implementace programu. V této kapitole vycházím ze zdrojů \cite{oracle}, \cite{java} a \cite{javafx}.
 
 
 \subsection{Programovací jazyk a použité technologie}
@@ -1379,8 +1381,8 @@ Při zadávání hodnoty do textového pole, je možné volat operace pomocí kl
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
 %% jazyka jako nepovinného parametru.
 \begin{kiconclusions}
-\indent \indent Výsledkem bakalářské práce je aplikace \textsc{Stromy}, která může sloužit k potřebě výuky \textit{Binárních vyhledávacích}, \textit{AVL} a \textit{červeno-černých stromů}. Aplikace názorně animuje operace \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání}. Tyto operace jsou zároveň stručně popsány, navíc je možnost je znovu zopakovat, což umožňuje lepší pochopení dané operace.\\
-\indent Aplikace je naprogramována s důrazem na jednoduchost a obecnost. Toto zobecnění hlavních částí programu umožňuje v budoucnu doprogramovat další typy stromů, aniž by se musela předělávat celá aplikace. 
+\indent \indent Výsledkem bakalářské práce je aplikace \textsc{Stromy}, která může sloužit k potřebě výuky \textit{Binárních vyhledávacích}, \textit{AVL} a \textit{červeno-černých stromů}. Aplikace názorně animuje operace \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání}. Tyto operace jsou zároveň stručně popsány, navíc je možnost je znovu zopakovat, což umožňuje lepší pochopení dané operace. Aplikace dále umožňuje ukládat a načítat vytvořené stromy a exportovat jako obrázek. Tento obrázek se pak dá vytisknout nebo použít v textu studijních materiálů.  \\
+\indent Aplikace je naprogramována s důrazem na jednoduchost a obecnost. Toto zobecnění hlavních částí programu umožňuje v budoucnu doprogramovat další typy stromů, aniž by se musela předělávat celá aplikace. Aplikace se dá rozšířit o stromy  např.: \textit{B strom}, \textit{B+ strom}, \textit{2-3-4 strom} a jiné. Další rozšíření bych osobně viděl v tom, že bych přidal podporu pro testování znalostí uživatele na náhodných příkladech stromů, kde by uživatel sám upravoval zobrazený strom na základě zadané operace. Tento uživatelem upravený strom by byl následně vyhodnocen, případně zobrazeno správné řešení. Do aplikace by i mohl být přidán seznam všech typů animací, které by byly při výběru zobrazeny. Tyto animace by se týkaly všech možných operací a jejich případů. Například při operaci odebírání by bylo možné si zobrazit odebírání kořene s počtem potomků 0, 1 nebo 2. Přitom u 2 potomků by byly na výběr zase všechny možnosti. Tak by bylo možné si zobrazit všechny druhy animací. Mezi další vylepšení bych určitě zařadil možnost upravení grafického vzhledu programu. K tomuto bych využil možnosti \textit{JavaFx}, která umožňuje měnit způsob zobrazování elementů okna pomocí kaskádových stylů.
 
 \end{kiconclusions}
 
@@ -1471,7 +1473,7 @@ nebo v souboru \texttt{readme.txt}.
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
 
 \bibitem{BinarySearch} \uppercase{Finlayson}, Ian. Binary Search Trees [online]. [cit. 2018-07-07].
-Dostupné z: \url{http://cs.umw.edu/~finlayson/class/fall12/cpsc230/notes/17-binary-search-trees.html}
+Dostupné z: \url{http://ianfinlayson.net/class/cpsc340/notes/20-binary-search-trees}
 
 \bibitem{Adelson} \uppercase{Adelson-Velskii}, G. M.; \uppercase{Landis}, E. M. An algorithm for the organization of information. Soviet Mathematics Doklady, 3:1259–1263, 1962. [online]. [cit. 2018-07-07] Dostupné z: \url{http://professor.ufabc.edu.br/~jesus.mena/courses/mc3305-2q-2015/AED2-10-avl-paper.pdf}
 
