@@ -104,7 +104,7 @@
 %\supplements[english]{one round flat CD/DVD with a small round hole in the middle}
 
 %% Poděkování. Stručné!
-\thanks{Rád bych poděkoval panu Mgr. Tomáši Kührovi Ph.D. za vedení této bakalářské práce a panu RNDr. Arnoštu Večerkovi za odbornou pomoc a poskytnuté materiály k práci. Dále bych chtěl poděkoval mé rodině a přítelkyni za podporu při tvorbě.}
+\thanks{Rád bych poděkoval panu Mgr. Tomáši Kührovi Ph.D. za vedení této bakalářské práce a panu RNDr. Arnoštu Večerkovi za odbornou pomoc a poskytnuté materiály k práci. Dále bych chtěl poděkovat mé rodině a přítelkyni za podporu při tvorbě.}
 
 %% Další dodatečné styly (balíky) potřebné pro sazbu vlastního textu práce.
 \usepackage{lipsum}
@@ -179,7 +179,7 @@
 \section{Úvod}
 \indent\indent Tato aplikace vznikla za účelem výuky základních binárních stromů. Obsahuje podporu pro \textit{Binární vyhledávací}, \textit{AVL} a \textit{Červenočerné stromy}. Tyto stromy jsem vybral ze seznamu stromů zmíněných v zadání bakalářské práce. Kvůli časové náročnosti implementace a testování animací těchto stromů, jsem byl bohužel nucen opustit od původní koncepce programu, který byl navržen na podporu všech zmíněných datových struktur.\\
 \indent Program pomocí animací zobrazuje operace: \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání} prvků ze stromů. Souběžně s animací zobrazuje stručný pseudokód aktuálně prováděné operace. Dále umožňuje \textit{opakovat poslední operaci}, \textit{ukládat a načítat stromy}, \textit{exportovat strom do obrázku} a \textit{generovat stromy s náhodnými prvky}.\\
-\indent Datová struktura \textit{strom} je v informatice velmi často využívána, hlavně jako způsob ukládání dat, kde má následné vyhledávání velmi dobrou časovou složitost. Kvůli této skutečnosti je důležité, aby každý programátor tyto struktury znal. K samotnému pochopení těchto stromů jsem i já osobně využíval různé programy, které umožňovali graficky vytvářet a provádět operace s těmito stromy. To byla pro mě motivace, abych si vybral bakalářskou práci na toto téma a mohl vytvořit obdobnou aplikaci jako ty, které jsem používal při učení. \\
+\indent Datová struktura \textit{strom} je v informatice velmi často využívána, hlavně jako způsob ukládání dat, kde má následné vyhledávání velmi dobrou časovou složitost. Kvůli této skutečnosti je důležité, aby každý programátor tyto struktury znal. K samotnému pochopení těchto stromů jsem i já osobně využíval různé programy, které umožňovaly graficky vytvářet a provádět operace s těmito stromy. To byla pro mě motivace, abych si vybral bakalářskou práci na toto téma a mohl vytvořit obdobnou aplikaci jako ty, které jsem používal při učení. \\
 \indent Text samotné práce se dělí na tři části: \textit{teoretickou část} -- zabývá se teorií vybraných stromů, \textit{programovací část} -- popisuje architekturu a samotnou implementaci programu, a \textit{část s uživatelskou příručkou} --  zde je vysvětleno uživatelské prostředí a funkcionalita.\\
 \newpage
 \section{Stromy}
@@ -1285,12 +1285,13 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 \newpage
 \subsubsection{Popis okna aplikace} 
 \begin{enumerate}
-\item Menu -- slouží k výběru stromu viz. obrázek \ref{menu}. Aktuální strom je v menu zvýrazněn bílou barvou. Při vybrání stromu se objeví dialogové okno \ref{dialogMenu}. Menu skryjeme po kliknutí na položku \textit{Zpět}.\\\\
+\item Menu -- slouží k výběru stromu viz. obrázek \ref{menu}. Aktuální strom je v menu zvýrazněn bílou barvou. % Při vybrání stromu se objeví dialogové okno \ref{dialogMenu}. 
+Menu skryjeme po kliknutí na položku \textit{Zpět}.\\\\
 \noindent Další funkce menu:
 \begin{itemize}
-\item \textit{Nový} -- Smaže aktuální strom, může zobrazit dialogové okno \ref{dialogMenuNovy}.
-\item \textit{Načíst...} -- Zobrazí standardní okno pro výběr umístění uloženého souboru \textit{název.tree}. Načítání může zobrazit dialog \ref{dialogMenuNacist} nebo chybovou hlášku \ref{dialogChyba1}.
-\item \textit{Uložit...} -- Zobrazí standardní okno pro výběr umístění a názvu ukládaného souboru. Na dané místo uloží aktuální strom jako \textit{název.tree}. Ukládání může zobrazit chybovou hlášku \ref{dialogChyba2}. 
+\item \textit{Nový} -- Smaže aktuální strom. %, může zobrazit dialogové okno \ref{dialogMenuNovy}.
+\item \textit{Načíst...} -- Zobrazí standardní okno pro výběr umístění uloženého souboru \textit{název.tree}.% Načítání může zobrazit dialog \ref{dialogMenuNacist} nebo chybovou hlášku \ref{dialogChyba1}.
+\item \textit{Uložit...} -- Zobrazí standardní okno pro výběr umístění a názvu ukládaného souboru. Na dané místo uloží aktuální strom jako \textit{název.tree}.% Ukládání může zobrazit chybovou hlášku \ref{dialogChyba2}. 
 \item \textit{Exportovat jako obrázek...} -- Zobrazí standardní okno pro výběr umístění a názvu obrázku. Na dané místo uloží obrázek aktuálního stromu jako \textit{název.png}.
 \item \textit{Ukončit} -- Ukončí aplikaci.
 \end{itemize}
@@ -1314,40 +1315,40 @@ if (iGraphicNode.getX().get() != xAnimatedNode.get()) {
 \end{figure}
 
 \newpage \noindent Dialogové okna aplikace:
-\begin{figure}[h!]
-\centering
-	\includegraphics[scale=0.8]{obrazky/37Dialog2.png}
-	\caption{Dialogové okno při změně stromu.}
-	\label{dialogMenu}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-	\includegraphics[scale=0.8]{obrazky/38Dialog4.png}
-	\caption{Dialogové okno kliknutí na \textit{Nový} v menu.}
-	\label{dialogMenuNovy}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-	\includegraphics[scale=0.8]{obrazky/41Dialog7.png}
-	\caption{Dialogové okno při načítání stromu.}
-	\label{dialogMenuNacist}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-	\includegraphics[scale=0.8]{obrazky/39Dialog5}
-	\caption{Chyba při načítání uloženého stromu.}
-	\label{dialogChyba1}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-	\includegraphics[scale=0.8]{obrazky/40Dialog6.png}
-	\caption{Chyba při ukládání stromu.}
-	\label{dialogChyba2}
-\end{figure}
+%\begin{figure}[h!]
+%\centering
+%	\includegraphics[scale=0.8]{obrazky/37Dialog2.png}
+%	\caption{Dialogové okno při změně stromu.}
+%	\label{dialogMenu}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%	\includegraphics[scale=0.8]{obrazky/38Dialog4.png}
+%	\caption{Dialogové okno kliknutí na \textit{Nový} v menu.}
+%	\label{dialogMenuNovy}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%	\includegraphics[scale=0.8]{obrazky/41Dialog7.png}
+%	\caption{Dialogové okno při načítání stromu.}
+%	\label{dialogMenuNacist}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%	\includegraphics[scale=0.8]{obrazky/39Dialog5}
+%	\caption{Chyba při načítání uloženého stromu.}
+%	\label{dialogChyba1}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%	\includegraphics[scale=0.8]{obrazky/40Dialog6.png}
+%	\caption{Chyba při ukládání stromu.}
+%	\label{dialogChyba2}
+%\end{figure}
 
 
 \begin{figure}[h!]
@@ -1469,7 +1470,7 @@ nebo v souboru \texttt{readme.txt}.
 
 \bibitem{belohlavekVychodil} \uppercase{BĚlohlávek}, Radim; \uppercase{Vychodil}, Vilém. Diskrétní matematika pro informatiky II [online]. 2010-10-16. [cit. 2018-07-07]. Dostupné z: \url{http://belohlavek.inf.upol.cz/vyuka/dm2.pdf}
 
-\bibitem{vecerka} \uppercase{veČerka}, Arnošt. Studijní materiály ALM-2
+\bibitem{vecerka} \uppercase{veČerka}, Arnošt. Poznámky k přednáškám z předmětu Algoritmická matematika 2. Univerzita Palackého v Olomouci, 2018.
 
 \bibitem{dvorsky} \uppercase{DvorskÝ}, Jiří. Algoritmy I.[online]. 2007-02-27. [cit. 2018-07-07]. Dostupné z: \url{http://www.cs.vsb.cz/dvorsky/Download/SkriptaAlgoritmy/Algoritmy.pdf}
 
