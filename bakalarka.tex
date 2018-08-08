@@ -90,9 +90,9 @@
 
 %% Anotace práce, včetně anglické (obvykle překlad z jazyka
 %% práce). Jeden odstavec!
-\annotation{Cílem bakalářské práce bylo vytvořit nástroj pro podporu výuky algoritmizace, konkrétně práce se základními stromovými datovými strukturami (binární vyhledávací stromy, AVL stromy, červeno-černé stromy). Výsledná aplikace podporuje vizualizaci vybraných datových struktur, včetně názorné demonstrace běžně prováděných operací s těmito datovými strukturami se souběžným zobrazením pseudokódu prováděné operace.}
+\annotation{Cílem bakalářské práce bylo vytvořit program pro podporu výuky algoritmizace, konkrétně práce se základními stromovými datovými strukturami (binární vyhledávací stromy, AVL stromy, červeno-černé stromy). Výsledná aplikace podporuje vizualizaci vybraných datových struktur, včetně názorné demonstrace běžně prováděných operací s těmito datovými strukturami se souběžným zobrazením pseudokódu prováděné operace.}
 
-\annotation[english]{}
+\annotation[english]{The main goal of my bachelor thesis was to create a program as a teaching support for algorithms, work with basic tree structures (binary search trees, AVL trees, red-black trees) in particular. Final program supports visualization of selected data structures, including illustrative demonstrations commonly performed operations with these data structures with parallel pseudocode imaging of performed operations.}
 
 %% Klíčová slova práce, včetně anglických. Oddělená (obvykle) středníkem.
 \keywords{Binární vyhledávací strom, Binární strom, AVL strom, Červeno-černý strom}
@@ -1382,14 +1382,16 @@ Při zadávání hodnoty do textového pole, je možné volat operace pomocí kl
 %% \documentclass, výchozí český) se zadává použitím makra s uvedením
 %% jazyka jako nepovinného parametru.
 \begin{kiconclusions}
-\indent \indent Výsledkem bakalářské práce je aplikace \textsc{Stromy}, která může sloužit k potřebě výuky \textit{Binárních vyhledávacích}, \textit{AVL} a \textit{červeno-černých stromů}. Aplikace názorně animuje operace \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání}. Tyto operace jsou zároveň stručně popsány, navíc je možnost je znovu zopakovat, což umožňuje lepší pochopení dané operace. Aplikace dále umožňuje ukládat a načítat vytvořené stromy a exportovat jako obrázek. Tento obrázek se pak dá vytisknout nebo použít v textu studijních materiálů.  \\
+\indent \indent Výsledkem bakalářské práce je aplikace \textsc{Stromy}, která může sloužit k potřebě výuky \textit{Binárních vyhledávacích}, \textit{AVL} a \textit{červeno-černých stromů}. Aplikace názorně animuje operace \textit{Vyhledávání}, \textit{Vkládání} a \textit{Odebírání}. Tyto operace jsou zároveň stručně popsány, navíc je možnost je znovu zopakovat, což umožňuje lepší pochopení dané operace. Aplikace dále umožňuje ukládat a načítat vytvořené stromy a exportovat je jako obrázek. Tento obrázek se pak dá vytisknout nebo použít v textu studijních materiálů.  \\
 \indent Aplikace je naprogramována s důrazem na jednoduchost a obecnost. Toto zobecnění hlavních částí programu umožňuje v budoucnu doprogramovat další typy stromů, aniž by se musela předělávat celá aplikace. \\
-\indent Program se dá rozšířit například o datové struktury: \textit{B strom}, \textit{B+ strom}, \textit{2-3-4 strom} a jiné. Další rozšíření bych osobně viděl v tom, že bych přidal podporu pro testování znalostí uživatele na náhodných příkladech stromů, kde by uživatel sám upravoval zobrazený strom na základě programem zadané operace. Tento uživatelem upravený strom by byl následně vyhodnocen, případně zobrazeno správné řešení. Do aplikace by i mohl být přidán seznam všech typů animací, které by byly při výběru zobrazeny. Tyto animace by se týkaly všech možných operací a jejich případů. Například při operaci odebírání by bylo možné si zobrazit odebírání kořene s počtem potomků 0, 1 nebo 2. Přitom u 2 potomků by byly na výběr zase všechny možné situace. Tak by bylo možné si zobrazit všechny druhy animací, bez nutnosti předem vytvořit potřebně vypadající strom. Mezi další vylepšení bych určitě zařadil možnost upravení grafického vzhledu programu. K tomuto bych využil možnosti \textit{JavaFx}, která umožňuje měnit způsob zobrazování elementů okna pomocí kaskádových stylů.
+\indent Program se dá rozšířit například o datové struktury: \textit{B strom}, \textit{B+ strom}, \textit{2-3-4 strom} a jiné. Další rozšíření bych osobně viděl v tom, že bych přidal podporu pro testování znalostí uživatele na náhodných příkladech stromů, kde by uživatel sám upravoval zobrazený strom na základě programem zadané operace. Tento uživatelem upravený strom by byl následně vyhodnocen, případně zobrazeno správné řešení. Do aplikace by i mohl být přidán seznam všech typů animací, které by byly při výběru zobrazeny. Tyto animace by se týkaly všech možných operací a jejich případů. Například při operaci odebírání by bylo možné si zobrazit odebírání kořene s počtem potomků 0, 1 nebo 2. Přitom u 2 potomků by byly na výběr opět všechny možné situace. Tak by bylo možné si zobrazit všechny druhy animací, bez nutnosti předem vytvořit potřebně vypadající strom. Mezi další vylepšení bych určitě zařadil možnost upravení grafického vzhledu programu. K tomuto bych využil možnosti \textit{JavaFx}, která umožňuje měnit způsob zobrazování elementů okna pomocí kaskádových stylů.
 
 \end{kiconclusions}
 
 \begin{kiconclusions}[english]
-Thesis conclusions in \uv{English}.
+\indent \indent The result of this bachelor thesis is the application \textsc{Stromy}, which can be used to teach about \textit{Binary Search}, \textit{AVL} and \textit{Red-Black Trees}. The application displays animations of the operations \textit{Search}, \textit{Insertion}, and \textit{Removal}. These operations are briefly described, there is also a possibility to repeat them again, which allows better understanding of the operation. The application also allows you to save and load created trees and export them as an image. This image can then be printed or used in the text of the study materials.\\
+\indent The application is programmed with emphasis on simplicity and generality. This generalization of the major parts of the program allows you to program additional types of trees in the future without having to remodel the entire application.\\
+\indent The program can be expanded for example by data structures: \textit{B tree}, \textit{B+ tree}, \textit{2-3-4 tree} and others. I would see another extension myself by adding support for testing user's knowledge on random tree examples where the user would modify the tree displayed by the program's specified operation. This user-modified tree would then be evaluated or the correct solution would be displayed. A list of all the types of animations that would be displayed during selection could be added to the app as well. These animations would cover all possible operations and their cases. For example, in the removal operation, it would be possible to display root removal with 0, 1 or 2 descendants. In the case of 2 offspring, all possible situations could be selected again. This would allow you to view all sorts of animations without the need to pre-create the necessary looking tree. Among other improvements I would certainly have included the possibility to adjust the graphical interface of the program. For this I would use the JavaFx option, which allows you to change the way the window elements are displayed using cascading styles.
 \end{kiconclusions}
 
 %% Přílohy obsahu textu práce, za makrem \appendix.
@@ -1404,10 +1406,6 @@ Thesis conclusions in \uv{English}.
 %% Obsah přiloženého CD/DVD. Poslední příloha. Upravte podle vlastní
 %% práce!
 \section{Obsah přiloženého CD/DVD} \label{sec:ObsahCD}
-
-Na samotném konci textu práce je uveden stručný popis obsahu
-přiloženého CD/DVD, tj.~jeho závazné adresářové struktury, důležitých
-souborů apod.
 
 \begin{description}
 
@@ -1425,7 +1423,7 @@ souborů apod.
   Kompletní zdrojové kódy programu \textsc{Stromy}.
 
 \item[\texttt{readme.txt}] \hfill \\
-  Instrukce pro instalaci a~spuštění programu \textsc{Stromy}, včetně
+  Instrukce pro spuštění programu \textsc{Stromy}, včetně
   všech požadavků pro jeho bezproblémový provoz.
 
 \end{description}
@@ -1438,12 +1436,6 @@ Navíc CD/DVD obsahuje:
   vztahující se k~práci.
 \end{description}
 
-U~veškerých cizích převzatých materiálů obsažených na CD/DVD jejich
-zahrnutí dovolují podmínky pro jejich šíření nebo přiložený souhlas
-držitele copyrightu. Pro všechny použité (a~citované) materiály,
-u~kterých toto není splněno a~nejsou tak obsaženy na CD/DVD, je uveden
-jejich zdroj (např.~webová adresa) v~bibliografii nebo textu práce
-nebo v souboru \texttt{readme.txt}.
 
 %% -------------------------------------------------------------------
 
